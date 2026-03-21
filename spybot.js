@@ -3,7 +3,7 @@
    No backend, no API keys — runs entirely in the browser
    ═══════════════════════════════════════════════════════════ */
 
-const PORTFOLIO_DATA = {
+const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
   name: "Bikash Sarraf",
   alias: "Spydomain",
   location: "Kathmandu, Nepal",
@@ -291,7 +291,7 @@ function formatResponse(text) {
 }
 
 /* ── UI Builder ── */
-export function initSpyBot() {
+function initSpyBot() {
   // Create chatbot UI
   const chatHTML = `
     <div class="spybot-fab" id="spybot-fab" title="Chat with SpyBot AI">

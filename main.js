@@ -1,120 +1,61 @@
 import { generateAndOpenResumePDF } from './cv-generator.js';
-import { initSpyBot } from './spybot.js';
 if (typeof window !== 'undefined') window.generateAndOpenResumePDF = generateAndOpenResumePDF;
 
-const $  = s => document.querySelector(s);
+const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const debounce = (fn, ms = 120) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
 
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
+  console.log("MAIN.JS: init() running");
   initMenu();
   initPages();
   initContactForm();
   startMatrix();
-  initTerminal();
+  startMatrix();
+  if (typeof initSpyBot === 'function') initSpyBot();
   generateFavicon();
-  initScrollProgress();
-  initRevealAnimations();
-  initStatCounters();
-  initSkillBars();
-  initCloudShellLaunch();
-  // Lazy-init SpyBot AI after initial paint for faster page load
-  setTimeout(initSpyBot, 1500);
-});
+
+  // V86 Boot — triggered by Enter or click
+  var v86Loading = document.getElementById('v86-loading');
+
+  function bootV86() {
+    if (window.emulatorStarted) return;
+    window.emulatorStarted = true;
+    console.log("MAIN.JS: bootV86() triggered");
+    if (v86Loading) {
+      v86Loading.innerHTML = '<p style="color: #0f0;">> Booting SpydomainOS...</p><p style="color: #666;">[WASM x86 Emulator Loading]</p>';
+    }
+    if (window.startEmulator) {
+      console.log("MAIN.JS: Calling window.startEmulator()");
+      window.startEmulator();
+    } else {
+      console.error("MAIN.JS: window.startEmulator is not defined!");
+    }
+  }
+
+  if (v86Loading) {
+    v86Loading.style.cursor = 'pointer';
+    v86Loading.addEventListener('click', bootV86);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !window.emulatorStarted) {
+      bootV86();
+    }
+  });
+}
+
+// Handle both cases: DOMContentLoaded may or may not have fired
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 /* ══════════════════════════════════════════════════
    CLOUD SHELL SECURE LAUNCHER
 ══════════════════════════════════════════════════ */
-function initCloudShellLaunch() {
-  const btn = document.getElementById('cloud-shell-btn');
-  if (!btn) return;
-
-  const originalHTML = btn.innerHTML;
-  const runningHTML = `<i class="fas fa-circle-notch fa-spin"></i> Terminal is running... <span class="cloud-shell-close" title="Dismiss">&times;</span>`;
-  let shellWin = null;
-  let pollTimer = null;
-
-  function setRunning() {
-    btn.innerHTML = runningHTML;
-    btn.classList.add('is-running');
-    localStorage.setItem('cloudShellRunning', 'true');
-    // Manual dismiss X
-    const closeBtn = btn.querySelector('.cloud-shell-close');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        resetBtn();
-      });
-    }
-  }
-
-  function resetBtn() {
-    btn.innerHTML = originalHTML;
-    btn.classList.remove('is-running');
-    localStorage.removeItem('cloudShellRunning');
-    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    shellWin = null;
-  }
-
-  function startPolling(win) {
-    // Wait 5 seconds for Google redirect to settle before polling win.closed
-    setTimeout(() => {
-      pollTimer = setInterval(() => {
-        try {
-          if (win.closed) {
-            resetBtn();
-          }
-        } catch (e) {
-          // Cross-origin — can't check, keep running state
-        }
-      }, 1500);
-    }, 5000);
-  }
-
-  // On page focus, check if the popup is still open
-  window.addEventListener('focus', () => {
-    if (!btn.classList.contains('is-running')) return;
-    if (shellWin) {
-      try {
-        if (shellWin.closed) {
-          resetBtn();
-        }
-      } catch (e) {
-        // Cross-origin, can't check
-      }
-    }
-  });
-
-  // Recover state on reload (auto-reset after 3 minutes if no popup ref)
-  if (localStorage.getItem('cloudShellRunning') === 'true') {
-    setRunning();
-    setTimeout(() => {
-      if (btn.classList.contains('is-running') && !shellWin) {
-        resetBtn();
-      }
-    }, 180000);
-  }
-
-  btn.addEventListener('click', async e => {
-    e.preventDefault();
-    if (btn.classList.contains('is-running')) return;
-
-    const setupCommand = `curl -sL "https://www.bikashkumarsarraf.com.np/setup-terminal.sh?t=$RANDOM" -o /tmp/s && sudo bash /tmp/s`;
-    
-    try {
-      await navigator.clipboard.writeText(setupCommand);
-      alert("✅ Setup command copied to your clipboard!\n\nGoogle Cloud Security requires manual pasting. Please press Ctrl+V (or Cmd+V) to paste the command into the Cloud Shell and hit Enter to initialize the Spydomain environment.");
-    } catch (err) {
-      console.error("Failed to copy command", err);
-    }
-
-    const url = `https://shell.cloud.google.com/cloudshell/open?show=terminal`;
-    shellWin = window.open(url, 'CloudShell', 'width=900,height=600,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes');
-    setRunning();
-    if (shellWin) startPolling(shellWin);
-  });
-}
+// Cloud Shell Launch removed
 
 function initScrollProgress() {
   const progress = document.getElementById('scroll-progress');
@@ -159,14 +100,14 @@ function initRevealAnimations() {
 function triggerPageReveals(pageId) {
   const page = document.getElementById(pageId);
   if (!page) return;
-  
+
   // Small delay for the page to become visible
   setTimeout(() => {
     const cards = page.querySelectorAll('.reveal-card');
     cards.forEach((card, i) => {
       setTimeout(() => card.classList.add('visible'), i * 80);
     });
-    
+
     // Trigger skill bars if on skills page
     if (pageId === 'skills') {
       animateSkillBars(page);
@@ -233,7 +174,7 @@ function animateSkillBars(container) {
    HAMBURGER MENU
 ══════════════════════════════════════════════════ */
 function initMenu() {
-  const btn   = $('.hamburger');
+  const btn = $('.hamburger');
   const panel = $('.nav-links');
   if (!btn || !panel) return;
 
@@ -282,7 +223,7 @@ function initMenu() {
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-page]');
     if (!el) return;
-    
+
     e.preventDefault();
     const page = el.getAttribute('data-page');
     if (page) {
@@ -307,7 +248,7 @@ function initPages() {
   const hash = window.location.hash.slice(1);
   showPage(hash || 'home');
 
-  window.addEventListener('popstate',   () => showPage(window.location.hash.slice(1) || 'home'));
+  window.addEventListener('popstate', () => showPage(window.location.hash.slice(1) || 'home'));
   window.addEventListener('hashchange', () => showPage(window.location.hash.slice(1) || 'home'));
 }
 
@@ -321,7 +262,7 @@ function showPage(id) {
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('data-page') === id));
   window.history.pushState({ id }, '', '#' + id);
   window.scrollTo(0, 0);
-  
+
   // Trigger reveal animations for the new page
   triggerPageReveals(id);
 }
@@ -354,7 +295,7 @@ function startMatrix() {
   let lastFrame = 0;
 
   function resize() {
-    canvas.width  = window.innerWidth;
+    canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     drops = Array(Math.floor(canvas.width / FS)).fill(1);
   }
@@ -390,254 +331,19 @@ function generateFavicon() {
     c.width = c.height = S;
     const x = c.getContext('2d');
     x.fillStyle = '#0b0f19'; x.fillRect(0, 0, S, S);
-    const g = x.createRadialGradient(S/2,S/2,8,S/2,S/2,S/2);
-    g.addColorStop(0,'#003322'); g.addColorStop(1,'#00110a');
-    x.fillStyle = g; x.beginPath(); x.arc(S/2,S/2,S/2-2,0,Math.PI*2); x.fill();
-    x.fillStyle='rgba(0,255,153,0.2)'; x.font='bold 10px monospace';
-    for (let y=10;y<S;y+=12) for (let i=6;i<S;i+=12) x.fillText(Math.random()>.5?'1':'0',i,y);
-    x.font='bold 28px Roboto Mono,monospace'; x.fillStyle='#00ff99';
-    x.textAlign='center'; x.textBaseline='middle';
-    x.shadowColor='#00ff99'; x.shadowBlur=8;
-    x.fillText('BS', S/2, S/2+2);
+    const g = x.createRadialGradient(S / 2, S / 2, 8, S / 2, S / 2, S / 2);
+    g.addColorStop(0, '#003322'); g.addColorStop(1, '#00110a');
+    x.fillStyle = g; x.beginPath(); x.arc(S / 2, S / 2, S / 2 - 2, 0, Math.PI * 2); x.fill();
+    x.fillStyle = 'rgba(0,255,153,0.2)'; x.font = 'bold 10px monospace';
+    for (let y = 10; y < S; y += 12) for (let i = 6; i < S; i += 12) x.fillText(Math.random() > .5 ? '1' : '0', i, y);
+    x.font = 'bold 28px Roboto Mono,monospace'; x.fillStyle = '#00ff99';
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.shadowColor = '#00ff99'; x.shadowBlur = 8;
+    x.fillText('BS', S / 2, S / 2 + 2);
     $$('link[rel="icon"]').forEach(e => e.remove());
     const lnk = document.createElement('link');
-    lnk.rel='icon'; lnk.type='image/png'; lnk.href=c.toDataURL('image/png');
+    lnk.rel = 'icon'; lnk.type = 'image/png'; lnk.href = c.toDataURL('image/png');
     document.head.appendChild(lnk);
-  } catch(_) {}
+  } catch (_) { }
 }
 
-/* ══════════════════════════════════════════════════
-   TERMINAL
-══════════════════════════════════════════════════ */
-function initTerminal() {
-  const out = document.getElementById('terminal-output');
-  const inp = document.getElementById('terminal-input');
-  if (!out || !inp) return;
-
-  const CMD = {
-    help:`Available commands:
-- whoami         : About me
-- education      : Education background
-- experience     : Work experience
-- projects       : My projects
-- contact        : Contact info
-- certifications : My certifications
-- social         : Social media links
-- skills         : Technical skills
-- ls             : List virtual files
-- cat [file]     : Read virtual files
-- pwd            : Print working directory
-- uname          : System information
-- date           : Current date/time
-- uptime         : System uptime
-- history        : Command history
-- neofetch       : System info display
-- cv             : Download CV as PDF
-- clear          : Clear the terminal`,
-    whoami: "I'm Bikash Sarraf (Spydomain), a Cybersecurity & Ethical Hacking Enthusiast from Kathmandu, Nepal. Currently studying at Softwarica College of IT and E-Commerce.",
-    education:`🎓 Education:
-- BSc (Hons) Cybersecurity & Ethical Hacking
-  Softwarica College, Kathmandu — Currently pursuing
-- +2 Science (Biology) | GPA: 3.08
-  Xavier International College, Kalopul — 2024
-- SEE | GPA: 3.10
-  Shree Sharaswasti English Boarding School, Bara — 2022`,
-    experience: "💼 Currently seeking professional cybersecurity opportunities.",
-    projects:`🚀 Projects:
-1. Keylogger (Python) — github.com/Spydomain/keylogger
-2. Bike Rental Nepal (Node+React) — github.com/Spydomain/front
-3. CVE-2023-22809 Exploits — github.com/Spydomain/CVE-2023-22809-automated-python-exploits
-4. ClipboardAI (Bash) — github.com/Spydomain/ClipboardAI
-5. NotesVista — notesvista.netlify.app
-6. NebullaComms — nebullacomms.netlify.app
-7. FGE ID Platform (Flutter) — army-testgit-45113358-666ec.web.app`,
-    contact:`📧 Contact:
-- Email:    bikashsarraf83@gmail.com
-- Location: Kathmandu, Nepal
-- LinkedIn: linkedin.com/in/bikash-sarraf-683787320
-- GitHub:   github.com/Spydomain`,
-    social:`🌐 Social:
-- LinkedIn:  linkedin.com/in/bikash-sarraf-683787320
-- Instagram: instagram.com/bikash.sarraf.399
-- Medium:    medium.com/@spydomain1
-- HackTheBox: app.hackthebox.com/users/2178446
-- TryHackMe: tryhackme.com/p/bikashsarraf`,
-    skills:`💻 Technical Skills:
-━━━ Languages ━━━
-  HTML/CSS ████████████████░░░░ 75%
-  Python   ██████████████░░░░░░ 70%
-  JS/Node  █████████████░░░░░░░ 65%
-  React.js ███████████░░░░░░░░░ 55%
-  C        ██████████░░░░░░░░░░ 50%
-  Bash     █████████████░░░░░░░ 65%
-  PHP/SQL  █████████░░░░░░░░░░░ 45%
-
-━━━ Security ━━━
-  OSINT        ██████████████░░░░░░ 70%
-  PenTesting   ████████████░░░░░░░░ 60%
-  Web AppSec   █████████████░░░░░░░ 65%
-  Network Sec  ███████████░░░░░░░░░ 55%
-  Bug Bounty   █████████░░░░░░░░░░░ 45%`,
-    certifications:`🎓 Certifications:
-- Cisco Certified Ethical Hacker
-- TryHackMe Pre-Security & Cyber Security 101
-- TryHackMe Advent of Cyber 2022 / 2023 / 2024
-- Certified Cybersecurity Educator Professional (CCEP)
-- Google Cybersecurity Professional Certificate
-- CompTIA PenTest+ (PT0-002)
-- Certified API Security Analyst`,
-    ls: "whoami.txt  education.txt  experience.txt  projects.txt  contact.txt  certifications.txt  social.txt  skills.txt  .secret",
-    pwd: "/home/spydomain",
-    uname: "SpydomainOS 6.1.0-cyber x86_64 GNU/Linux",
-    hostname: "spydomain-portfolio",
-    id: "uid=1337(spydomain) gid=1337(hackers) groups=1337(hackers),27(sudo)",
-    uptime() {
-      const hours = Math.floor(Math.random() * 72) + 1;
-      const mins = Math.floor(Math.random() * 60);
-      return ` ${new Date().toLocaleTimeString()} up ${hours}:${String(mins).padStart(2,'0')}, 1 user, load average: 0.42, 0.31, 0.28`;
-    },
-    neofetch() {
-      return `       ▄▄▄▄▄▄▄▄▄▄▄       spydomain@portfolio
-   ▄▀░░░░░░░░░░░░░▀▄     ─────────────────
-  █░░░░░░░░░░░░░░░░░█    OS: SpydomainOS 6.1.0-cyber
- █░░░░░░░░░░░░░░░░░░░█   Host: GitHub Pages
- █░░▄▀▀▀▀▀▀▀▀▄░░░░░░░█   Kernel: web-5.15.x
- █░█  🔒  🛡️  █░░░░░░█   Uptime: Always On
- █░█         █░░░░░░░█   Shell: portfolio-sh
- █░░▀▄▄▄▄▄▄▄▀░░░░░░░░█   DE: CyberSec Theme
-  █░░░░░░░░░░░░░░░░░█    Terminal: xterm-256color
-   ▀▄░░░░░░░░░░░░░▀▄     Resolution: ∞ × ∞
-     ▀▀▀▀▀▀▀▀▀▀▀▀▀       CPU: Neural Engine v3
-                          Memory: 1337MB / ∞MB`;
-    },
-    cat(args) {
-      if (!args) return "Usage: cat [filename]";
-      if (args === '.secret') return "🔐 Nice try! But the secrets are encrypted. Try harder! 😎";
-      const f = args.toLowerCase().replace('.txt','');
-      const alias = { 'about':'whoami', 'me':'whoami' };
-      const key = alias[f] || f;
-      if (key in CMD && typeof CMD[key] === 'string') return CMD[key];
-      if (key in CMD && typeof CMD[key] === 'function') return CMD[key]();
-      return `cat: ${args}: No such file or directory`;
-    },
-    date()  { return new Date().toString(); },
-    echo(a) { return a || ''; },
-    cv()    { 
-      enq('Generating PDF and opening CV...'); 
-      setTimeout(() => generateAndOpenResumePDF(), 800); 
-      return ''; 
-    },
-    clear() { out.innerHTML = ''; return ''; },
-  };
-
-  // Command history
-  const cmdHistory = [];
-  let historyIdx = -1;
-
-  let q = Promise.resolve();
-  const type = (text, cls='command-output') => new Promise(res => {
-    const d = document.createElement('div');
-    d.className = cls; out.appendChild(d);
-    let i = 0;
-    const termWrap = document.getElementById('terminal');
-    const tick = () => {
-      if (i < text.length) {
-        d.textContent += text[i++];
-        if (termWrap) termWrap.scrollTop = termWrap.scrollHeight;
-        out.scrollTop = out.scrollHeight;
-        setTimeout(tick, 5);
-      } else {
-        if (termWrap) termWrap.scrollTop = termWrap.scrollHeight;
-        out.scrollTop = out.scrollHeight;
-        res();
-      }
-    };
-    tick();
-  });
-  const enq = (t, c) => { q = q.then(() => type(t, c)); };
-
-  enq("Welcome to Spydomain's Portfolio Terminal\nType 'help' to see available commands\n\n", 'welcome-message');
-
-  inp.addEventListener('keydown', e => {
-    // Tab completion
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      const val = inp.value.trim();
-      if (!val) return;
-      const parts = val.split(' ');
-      const cmds = Object.keys(CMD);
-      const files = ["whoami.txt", "education.txt", "experience.txt", "projects.txt", "contact.txt", "certifications.txt", "social.txt", "skills.txt", ".secret"];
-      
-      let matches = [];
-      if (parts.length === 1) {
-        matches = cmds.filter(c => c.startsWith(parts[0].toLowerCase()));
-      } else if (parts[0].toLowerCase() === 'cat') {
-        matches = files.filter(f => f.startsWith(parts[1].toLowerCase()));
-      }
-
-      if (matches.length === 1) {
-        inp.value = (parts.length === 1) ? matches[0] + ' ' : parts[0] + ' ' + matches[0];
-      }
-    }
-
-    // Arrow up/down for history
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (cmdHistory.length > 0 && historyIdx < cmdHistory.length - 1) {
-        historyIdx++;
-        inp.value = cmdHistory[cmdHistory.length - 1 - historyIdx];
-      }
-      return;
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (historyIdx > 0) {
-        historyIdx--;
-        inp.value = cmdHistory[cmdHistory.length - 1 - historyIdx];
-      } else {
-        historyIdx = -1;
-        inp.value = '';
-      }
-      return;
-    }
-
-    if (e.key !== 'Enter') return;
-    e.preventDefault();
-    const cmd = inp.value.trim();
-    if (!cmd) return;
-
-    // Add to history
-    cmdHistory.push(cmd);
-    historyIdx = -1;
-
-    const ln = document.createElement('div');
-    ln.className = 'command-line';
-    ln.innerHTML = `<span class="prompt">Bikash@Spydomain#</span> ${cmd}`;
-    out.appendChild(ln);
-    const parts = cmd.split(' ');
-    const k = parts[0].toLowerCase();
-    const args = parts.slice(1).join(' ');
-
-    // Special command: history
-    if (k === 'history') {
-      const histStr = cmdHistory.map((c, i) => `  ${i + 1}  ${c}`).join('\n');
-      enq(histStr);
-    } else if (k in CMD) {
-      const r = typeof CMD[k] === 'function' ? CMD[k](args) : CMD[k];
-      if (r) enq(r);
-    } else {
-      enq(`Command not found: ${cmd}\nType 'help' for available commands`, 'error-message');
-    }
-    inp.value = '';
-    const termWrap = document.getElementById('terminal');
-    if (termWrap) termWrap.scrollTop = termWrap.scrollHeight;
-    out.scrollTop = out.scrollHeight;
-  });
-
-  document.addEventListener('click', e => {
-    if (e.target.closest('#terminal') || e.target.closest('#terminal-output')) {
-      inp.focus();
-    }
-  });
-  setTimeout(() => inp.focus(), 500);
-}
