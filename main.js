@@ -11,7 +11,6 @@ function init() {
   initPages();
   initContactForm();
   startMatrix();
-  startMatrix();
   if (typeof initSpyBot === 'function') initSpyBot();
   generateFavicon();
 
