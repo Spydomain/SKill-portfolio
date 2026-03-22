@@ -98,6 +98,11 @@
                         } else {
                             console.log("V86-SETUP: Starting injection");
                             state = "INJECTING";
+                            const statusEl = document.getElementById('v86-status');
+                            if (statusEl) {
+                                statusEl.innerHTML = '<i class="fas fa-sync fa-spin"></i> PREPARING';
+                                statusEl.style.color = '#00ccff';
+                            }
                             injectData(emulator);
                         }
                         buffer = "";
@@ -107,6 +112,13 @@
                         injectData(emulator);
                         buffer = "";
                     }
+                }
+            } else if (buffer.indexOf("STATUS_RUNNING") !== -1 && state !== "DONE") {
+                state = "DONE";
+                const statusEl = document.getElementById('v86-status');
+                if (statusEl) {
+                    statusEl.innerHTML = '<i class="fas fa-check-circle"></i> RUNNING';
+                    statusEl.style.color = '#00ff99';
                 }
             }
             lastBufferLength = buffer.length;
@@ -138,14 +150,14 @@
             "echo 'ABOUT: I am passionate about learning new things in technology, especially cybersecurity, ethical hacking, and web development. I enjoy tackling challenges and continuously developing my skills.' >> /home/Bikash/portfolio/aboutme.txt",
             "echo 'GOAL: To become a skilled cybersecurity professional and help make the digital world a safer place.' >> /home/Bikash/portfolio/aboutme.txt",
 
-            // Education (Plural as requested)
-            "echo '--- EDUCATION TIMELINE ---' > /home/Bikash/portfolio/educations.txt",
-            "echo '2024 — Present: Bachelor in Cyber Security and Ethical Hacking' >> /home/Bikash/portfolio/educations.txt",
-            "echo '   Softwarica College of IT & E-Commerce, Kathmandu Nepal' >> /home/Bikash/portfolio/educations.txt",
-            "echo '2022 — 2024: +2 Science (Biology) - GPA: 3.08' >> /home/Bikash/portfolio/educations.txt",
-            "echo '   Xavier International College, Kalopul, Kathmandu Nepal' >> /home/Bikash/portfolio/educations.txt",
-            "echo '2022: SEE - GPA: 3.10' >> /home/Bikash/portfolio/educations.txt",
-            "echo '   Shree Sharaswasti English Boarding School, Bara Nepal' >> /home/Bikash/portfolio/educations.txt",
+            // Education
+            "echo '--- EDUCATION TIMELINE ---' > /home/Bikash/portfolio/education.txt",
+            "echo '2024 — Present: Bachelor in Cyber Security and Ethical Hacking' >> /home/Bikash/portfolio/education.txt",
+            "echo '   Softwarica College of IT & E-Commerce, Kathmandu Nepal' >> /home/Bikash/portfolio/education.txt",
+            "echo '2022 — 2024: +2 Science (Biology) - GPA: 3.08' >> /home/Bikash/portfolio/education.txt",
+            "echo '   Xavier International College, Kalopul, Kathmandu Nepal' >> /home/Bikash/portfolio/education.txt",
+            "echo '2022: SEE - GPA: 3.10' >> /home/Bikash/portfolio/education.txt",
+            "echo '   Shree Sharaswasti English Boarding School, Bara Nepal' >> /home/Bikash/portfolio/education.txt",
 
             // Skills
             "echo '--- TECHNICAL SKILLS ---' > /home/Bikash/portfolio/skills.txt",
@@ -181,17 +193,24 @@
 
             // Backward compatibility
             "cp /home/Bikash/portfolio/mywork.txt /home/Bikash/portfolio/projects.txt",
-            "cp /home/Bikash/portfolio/educations.txt /home/Bikash/portfolio/education.txt",
+            
+            // Timezone: Asia/Kathmandu (UTC+5:45)
+            "echo 'Asia/Kathmandu' > /etc/timezone",
+            "export TZ='NPT-5:45'",
 
             // Final Setup & Security Lockdown
             "chown -R Bikash:Bikash /home/Bikash",
-            "echo \"PS1='\\e[1;32mBikash@Spydomain\\e[0m:\\e[1;34m\\w\\e[0m\\$ '\" > /home/Bikash/.profile",
+            "echo \"PS1='\\\\e[1;32mBikash@Spydomain\\\\e[0m:\\\\e[1;34m\\\\w\\\\e[0m\\\\$ '\" > /home/Bikash/.profile",
+            "echo \"export TZ='NPT-5:45'\" >> /home/Bikash/.profile",
             "echo \"cd ~/portfolio\" >> /home/Bikash/.profile",
-            "echo \"clear\" >> /home/Bikash/.profile",
+            "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /home/Bikash/.profile",
             "echo \"echo -e '\\\\e[1;32m+----------------------------------------------+\\\\e[0m'\" >> /home/Bikash/.profile",
             "echo \"echo -e '\\\\e[1;32m|      WELCOME TO SPYDOMAIN SECURE SHELL       |\\\\e[0m'\" >> /home/Bikash/.profile",
             "echo \"echo -e '\\\\e[1;32m+----------------------------------------------+\\\\e[0m'\" >> /home/Bikash/.profile",
             "echo \"echo 'Type \"ls\" to see my portfolio details.'\" >> /home/Bikash/.profile",
+            "echo \"echo ''\" >> /home/Bikash/.profile",
+            "cp /home/Bikash/.profile /etc/profile", // Broaden coverage
+            "printf \"\\033[H\\033[2J\\033[3J\"",
             "passwd -l root", // LOCK ROOT PERMANENTLY
             "echo SPYDOMAIN_READY",
             // Sanitization: fix potentially corrupted shell in /etc/passwd
@@ -199,7 +218,8 @@
             "sed -i 's|Bikash:x:1001:1001:.*:/home/Bikash:.*|Bikash:x:1001:1001:Bikash:/home/Bikash:/bin/sh|' /etc/passwd",
             "chown -R 1001:1001 /home/Bikash", // Ensure ownership is correct
             "id Bikash", 
-            "su - Bikash"
+            "su - Bikash",
+            "echo STATUS_RUNNING" // Final trigger for JS
         ];
         
         var delay = 500;

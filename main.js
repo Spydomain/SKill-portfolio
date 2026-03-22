@@ -24,6 +24,11 @@ function init() {
     if (v86Loading) {
       v86Loading.innerHTML = '<p style="color: #0f0;">> Booting SpydomainOS...</p><p style="color: #666;">[WASM x86 Emulator Loading]</p>';
     }
+    const statusEl = document.getElementById('v86-status');
+    if (statusEl) {
+      statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> BOOTING';
+      statusEl.style.color = '#ffbd2e';
+    }
     if (window.startEmulator) {
       console.log("MAIN.JS: Calling window.startEmulator()");
       window.startEmulator();
