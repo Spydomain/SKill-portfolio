@@ -58,6 +58,22 @@
                 serial_container_xtermjs: screenDiv, // Use xterm.js!
             });
             console.log("V86-SETUP: Emulator created using xterm.js");
+            
+            // Customize xterm.js instance for smooth scrolling and better experience
+            setTimeout(function() {
+                if (emulator.serial_adapter && emulator.serial_adapter.term) {
+                    var term = emulator.serial_adapter.term;
+                    term.setOption('scrollback', 10000);
+                    term.setOption('scrollSensitivity', 1);
+                    term.setOption('theme', {
+                        background: '#000000',
+                        foreground: '#ffffff',
+                        cursor: '#00ff99',
+                        selection: 'rgba(0, 255, 153, 0.3)'
+                    });
+                    console.log("V86-SETUP: Xterm.js customized successfully");
+                }
+            }, 1000);
         } catch (e) {
             console.error("V86-SETUP: Emulator creation FAILED:", e);
             return;
@@ -130,9 +146,18 @@
             if (buffer.length > 5000) buffer = buffer.slice(-2000);
         }
 
-        emulator.add_listener("serial0-output-char", onChar);
-        emulator.add_listener("serial0-output-byte", onChar);
-        emulator.add_listener("output-char", onChar); // Legacy compat
+        emulator.add_listener("serial0-output-char", function(char) {
+            onChar(char);
+            if (emulator.serial_adapter && emulator.serial_adapter.term) {
+                emulator.serial_adapter.term.scrollToBottom();
+            }
+        });
+        emulator.add_listener("serial0-output-byte", function(char) {
+            onChar(char);
+            if (emulator.serial_adapter && emulator.serial_adapter.term) {
+                emulator.serial_adapter.term.scrollToBottom();
+            }
+        });
     }
 
     function injectData(emulator) {
