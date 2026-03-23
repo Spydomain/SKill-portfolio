@@ -198,6 +198,9 @@
             "echo '5. NotesVista: Note-taking app (notesvista.netlify.app)' >> /home/Bikash/portfolio/mywork.txt",
             "echo '6. NebullaComms: Communication app (nebullacomms.netlify.app)' >> /home/Bikash/portfolio/mywork.txt",
             "echo '7. FGE Identification Test Platform: Flutter app (army-testgit-45113358-666ec.web.app)' >> /home/Bikash/portfolio/mywork.txt",
+            "echo '8. CVE-2021-22555 PoC: Python-based (github.com/Spydomain/CVE-2021-22555-Poc)' >> /home/Bikash/portfolio/mywork.txt",
+            "echo '9. CVE-2017-1000112 PoC: Python-based (github.com/Spydomain/CVE-2017-1000112-PoC)' >> /home/Bikash/portfolio/mywork.txt",
+            "echo '10. CVE-2022-0435 PoC: Python-based (github.com/Spydomain/CVE-2022-0435-Poc)' >> /home/Bikash/portfolio/mywork.txt",
 
             // Certifications
             "echo '--- CERTIFICATIONS ---' > /home/Bikash/portfolio/certifications.txt",
@@ -207,6 +210,7 @@
             "echo '- CCEP (Certified Cybersecurity Educator Professional)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- TryHackMe: Pre-Security, Cyber Security 101, Advent of Cyber (2022-2024)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Certified API Security Analyst' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- APIsec Certified Practitioner' >> /home/Bikash/portfolio/certifications.txt",
 
             // Contact
             "echo '--- CONTACT DETAILS ---' > /home/Bikash/portfolio/contact.txt",

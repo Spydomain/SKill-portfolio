@@ -47,7 +47,10 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     { name: "ClipboardAI", tech: "Bash", desc: "Sends copied text to LLAMA and pops up instant offline answers", link: "github.com/Spydomain/ClipboardAI" },
     { name: "NotesVista", tech: "MERN Stack", desc: "Modern note-taking application", link: "notesvista.netlify.app" },
     { name: "NebullaComms", tech: "MERN Stack", desc: "Modern communication application", link: "nebullacomms.netlify.app" },
-    { name: "FGE Identification Test Platform", tech: "Flutter", desc: "Test-taking app for French Army", link: "army-testgit-45113358-666ec.web.app" }
+    { name: "FGE Identification Test Platform", tech: "Flutter", desc: "Test-taking app for French Army", link: "army-testgit-45113358-666ec.web.app" },
+    { name: "CVE-2021-22555 PoC", tech: "Python", desc: "Proof of Concept for CVE-2021-22555 vulnerability", link: "github.com/Spydomain/CVE-2021-22555-Poc" },
+    { name: "CVE-2017-1000112 PoC", tech: "Python", desc: "Proof of Concept for CVE-2017-1000112 vulnerability", link: "github.com/Spydomain/CVE-2017-1000112-PoC" },
+    { name: "CVE-2022-0435 PoC", tech: "Python", desc: "Proof of Concept for CVE-2022-0435 vulnerability", link: "github.com/Spydomain/CVE-2022-0435-Poc" }
   ],
 
   certifications: [
@@ -60,7 +63,8 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     "Certified Cybersecurity Educator Professional (CCEP)",
     "Google Cybersecurity Professional Certificate",
     "CompTIA PenTest+ (PT0-002)",
-    "Certified API Security Analyst"
+    "Certified API Security Analyst",
+    "APIsec Certified Practitioner"
   ],
 
   social: {
@@ -77,8 +81,8 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
   funFacts: [
     "Bikash has completed 5 TryHackMe learning paths!",
     "His alias 'Spydomain' reflects his passion for OSINT and digital reconnaissance.",
-    "He's built 7 projects spanning Python, Node.js, React, Flutter, and Bash!",
-    "He holds 10 cybersecurity certifications — and counting!",
+    "He's built 10 projects spanning Python, Node.js, React, Flutter, and Bash!",
+    "He holds 11 cybersecurity certifications — and counting!",
     "He's active on both TryHackMe and HackTheBox platforms.",
     "His ClipboardAI project works completely offline using LLAMA!",
     "He built a CVE exploit tool (CVE-2023-22809) for educational purposes.",
@@ -198,7 +202,7 @@ const INTENTS = [
     id: 'experience',
     keywords: ['experience', 'work', 'job', 'intern', 'career', 'employ'],
     responses: () => [
-      `Bikash is currently a **student** focusing on building his skills and portfolio. 🎓\n\nWhile he doesn't have formal work experience yet, he has:\n- 🚀 Built **7 real-world projects**\n- 🏅 Earned **10 certifications**\n- 🔒 Active on **TryHackMe** & **HackTheBox**\n- 🛠️ Created actual **CVE exploit tools**\n\nHe's actively seeking cybersecurity opportunities!`
+      `Bikash is currently a **student** focusing on building his skills and portfolio. 🎓\n\nWhile he doesn't have formal work experience yet, he has:\n- 🚀 Built **10 real-world projects**\n- 🏅 Earned **11 certifications**\n- 🔒 Active on **TryHackMe** & **HackTheBox**\n- 🛠️ Created actual **CVE exploit tools**\n\nHe's actively seeking cybersecurity opportunities!`
     ]
   },
   {
