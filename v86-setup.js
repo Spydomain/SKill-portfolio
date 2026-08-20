@@ -72,6 +72,24 @@
                         selection: 'rgba(0, 255, 153, 0.3)'
                     });
                     console.log("V86-SETUP: Xterm.js customized successfully");
+
+                    // Monitor user typed commands directly
+                    var userTyped = "";
+                    term.onData(function(data) {
+                        if (data === "\r" || data === "\n") {
+                            var cmd = userTyped.trim().toLowerCase();
+                            userTyped = "";
+                            if (cmd === "exit" || cmd === "su" || cmd === "sudo" || cmd === "root" || cmd === "pwn") {
+                                if (initialBootDone) {
+                                    triggerRootCelebration();
+                                }
+                            }
+                        } else if (data === "\x7f" || data === "\b") {
+                            userTyped = userTyped.slice(0, -1);
+                        } else if (data.length === 1 && data.charCodeAt(0) >= 32) {
+                            userTyped += data;
+                        }
+                    });
                 }
             }, 1000);
         } catch (e) {
@@ -215,6 +233,21 @@
 
         var initialBootDone = false;
         var rootGifShown = false;
+
+        function triggerRootCelebration() {
+            if (rootGifShown) return;
+            rootGifShown = true;
+            console.log("V86-SETUP: Triggering root celebration & party buffer");
+            launchPartyConfetti();
+            var gifEl = document.getElementById('v86-root-gif');
+            if (gifEl) {
+                gifEl.style.display = 'flex';
+            }
+            setTimeout(function() {
+                emulator.serial0_send("echo -e '\\e[1;31m🚨 [ALERT] SYSTEM COMPROMISED! ROOT PRIVILEGES GRANTED! 🚨\\n\\e[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \\n |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |\\n | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |\\n |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|\\n |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)\\e[0m\\n\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\e[0m\\n\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\e[0m\\n\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\e[0m\\n\\e[1;30m-----------------------------------------------------------------\\e[0m\\n'\n");
+            }, 300);
+        }
+
         function onChar(char) {
             if (typeof char === "number") char = String.fromCharCode(char);
             buffer += char;
@@ -222,20 +255,12 @@
 
             if (state === "DONE" && initialBootDone) {
                 var clean = buffer.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "");
-                var tail = clean.slice(-40);
+                var tail = clean.slice(-100);
                 
                 if (tail.includes("Bikash@Spydomain")) {
                     rootGifShown = false;
-                } else if (!rootGifShown && (tail.includes("/ #") || tail.includes("root@"))) {
-                    rootGifShown = true;
-                    launchPartyConfetti();
-                    const gifEl = document.getElementById('v86-root-gif');
-                    if (gifEl) {
-                        gifEl.style.display = 'flex';
-                    }
-                    setTimeout(function() {
-                        emulator.serial0_send("echo -e '\\e[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \\n |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |\\n | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |\\n |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|\\n |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)\\e[0m\\n\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\e[0m\\n\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\e[0m\\n\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\e[0m\\n'\n");
-                    }, 200);
+                } else if (!rootGifShown && (tail.includes("/ #") || tail.includes("root@") || tail.includes("exit"))) {
+                    triggerRootCelebration();
                 }
             }
         }
