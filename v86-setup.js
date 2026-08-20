@@ -328,8 +328,6 @@
                     "\x1b[1;30m-----------------------------------------------------------------\x1b[0m\r\n\r\n"
                 );
             }
-            // Permanently disable exit command in root shell
-            emulator.serial0_send("alias exit='echo \"[!] exit command disabled in root shell.\"' ; alias logout='echo \"[!] logout command disabled in root shell.\"' \n");
         }
 
         function onChar(char) {
@@ -445,6 +443,8 @@
             "echo \"PS1='\\\\e[1;31mroot@Spydomain\\\\e[0m:\\\\e[1;34m\\\\w\\\\e[0m\\\\# '\" > /root/.profile",
             "echo \"export TZ='NPT-5:45'\" >> /root/.profile",
             "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /root/.profile",
+            "echo \"alias exit='echo \"[!] exit command disabled in root shell.\"'\" >> /etc/profile",
+            "echo \"alias logout='echo \"[!] logout command disabled in root shell.\"'\" >> /etc/profile",
             "echo \"printf '\\\\033[H\\\\033[2J\\\\033[3J'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;31m'\" >> /root/.profile",
             "echo \"echo '  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ '\" >> /root/.profile",
