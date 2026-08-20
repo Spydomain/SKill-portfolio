@@ -248,22 +248,20 @@
             "echo \"export TZ='NPT-5:45'\" >> /home/Bikash/.profile",
             "echo \"cd ~/portfolio\" >> /home/Bikash/.profile",
             "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /home/Bikash/.profile",
+            "echo \"printf '\\\\033[H\\\\033[2J\\\\033[3J'\" >> /home/Bikash/.profile",
             "echo \"echo -e '\\\\e[1;32m+----------------------------------------------+\\\\e[0m'\" >> /home/Bikash/.profile",
             "echo \"echo -e '\\\\e[1;32m|      WELCOME TO SPYDOMAIN SECURE SHELL       |\\\\e[0m'\" >> /home/Bikash/.profile",
             "echo \"echo -e '\\\\e[1;32m+----------------------------------------------+\\\\e[0m'\" >> /home/Bikash/.profile",
             "echo \"echo 'Type \"ls\" to see my portfolio details.'\" >> /home/Bikash/.profile",
             "echo \"echo ''\" >> /home/Bikash/.profile",
-            "cp /home/Bikash/.profile /etc/profile", // Broaden coverage
-            "printf \"\\033[H\\033[2J\\033[3J\"",
-            "passwd -l root", // LOCK ROOT PERMANENTLY
-            "echo SPYDOMAIN_READY",
-            // Sanitization: fix potentially corrupted shell in /etc/passwd
+            "cp /home/Bikash/.profile /etc/profile",
+            "passwd -l root",
             "sed -i 's|:fault non-root user$|:/bin/sh|' /etc/passwd",
             "sed -i 's|Bikash:x:1001:1001:.*:/home/Bikash:.*|Bikash:x:1001:1001:Bikash:/home/Bikash:/bin/sh|' /etc/passwd",
-            "chown -R 1001:1001 /home/Bikash", // Ensure ownership is correct
-            "id Bikash", 
+            "chown -R 1001:1001 /home/Bikash",
             "su - Bikash",
-            "echo STATUS_RUNNING" // Final trigger for JS
+            "echo STATUS_RUNNING",
+            "clear"
         ];
         
         var delay = 500;
