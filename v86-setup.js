@@ -95,6 +95,53 @@
                         ro.observe(screenDiv);
                     }
 
+                    // Interactive 8-Direction Drag Resizing Handler
+                    var win = document.getElementById("v86-terminal-window");
+                    var termContainer = document.getElementById("v86-terminal-container");
+                    if (win) {
+                        var resizers = win.querySelectorAll(".resizer");
+                        resizers.forEach(function(resizer) {
+                            resizer.addEventListener("mousedown", function(e) {
+                                e.preventDefault();
+                                var startX = e.clientX;
+                                var startY = e.clientY;
+                                var startWidth = win.offsetWidth;
+                                var startHeight = termContainer ? termContainer.offsetHeight : 450;
+                                var isR = resizer.classList.contains("resizer-r") || resizer.classList.contains("resizer-br") || resizer.classList.contains("resizer-tr");
+                                var isL = resizer.classList.contains("resizer-l") || resizer.classList.contains("resizer-bl") || resizer.classList.contains("resizer-tl");
+                                var isB = resizer.classList.contains("resizer-b") || resizer.classList.contains("resizer-br") || resizer.classList.contains("resizer-bl");
+                                var isT = resizer.classList.contains("resizer-t") || resizer.classList.contains("resizer-tr") || resizer.classList.contains("resizer-tl");
+
+                                function onMouseMove(ev) {
+                                    if (isR) {
+                                        var newWidth = startWidth + (ev.clientX - startX);
+                                        if (newWidth >= 320) win.style.width = newWidth + "px";
+                                    } else if (isL) {
+                                        var newWidthL = startWidth - (ev.clientX - startX);
+                                        if (newWidthL >= 320) win.style.width = newWidthL + "px";
+                                    }
+                                    if (isB) {
+                                        var newHeight = startHeight + (ev.clientY - startY);
+                                        if (newHeight >= 250 && termContainer) termContainer.style.height = newHeight + "px";
+                                    } else if (isT) {
+                                        var newHeightT = startHeight - (ev.clientY - startY);
+                                        if (newHeightT >= 250 && termContainer) termContainer.style.height = newHeightT + "px";
+                                    }
+                                    fitTerminal();
+                                }
+
+                                function onMouseUp() {
+                                    window.removeEventListener("mousemove", onMouseMove);
+                                    window.removeEventListener("mouseup", onMouseUp);
+                                    fitTerminal();
+                                }
+
+                                window.addEventListener("mousemove", onMouseMove);
+                                window.addEventListener("mouseup", onMouseUp);
+                            });
+                        });
+                    }
+
                     // Monitor user typed commands directly
                     var userTyped = "";
                     term.onData(function(data) {
