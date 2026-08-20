@@ -146,11 +146,15 @@
             buffer += char;
             if (buffer.length > 5000) buffer = buffer.slice(-2000);
 
-            if (state === "DONE" && !rootGifShown && (buffer.includes("root@Spydomain") || buffer.includes("YOU GOT ROOT ACCESS"))) {
-                rootGifShown = true;
-                const gifEl = document.getElementById('v86-root-gif');
-                if (gifEl) {
-                    gifEl.style.display = 'flex';
+            if (state === "DONE" && !rootGifShown) {
+                var clean = buffer.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "");
+                if (clean.includes("/ #") || clean.includes("root@") || clean.includes("YOU GOT ROOT ACCESS")) {
+                    rootGifShown = true;
+                    const gifEl = document.getElementById('v86-root-gif');
+                    if (gifEl) {
+                        gifEl.style.display = 'flex';
+                    }
+                    emulator.serial0_send("echo -e '\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\e[0m\\n\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\e[0m\\n\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\e[0m\\n'\n");
                 }
             }
         }
