@@ -151,7 +151,24 @@
                         if (data === "\r" || data === "\n") {
                             var cmd = userTyped.trim().toLowerCase();
                             userTyped = "";
-                            if (cmd === "exit" || cmd === "su" || cmd === "sudo" || cmd === "root" || cmd === "pwn") {
+                            if (cmd === "exit") {
+                                if (initialBootDone) {
+                                    if (!isRootUser) {
+                                        // Escalate Bikash to root shell on exit
+                                        console.log("V86-SETUP: User typed exit -> Escalating to root shell");
+                                        isRootUser = true;
+                                        emulator.serial0_send("su - root\n");
+                                        triggerRootCelebration();
+                                    } else {
+                                        // Block exit in root shell
+                                        console.log("V86-SETUP: Exit disabled in root shell");
+                                        if (emulator.serial_adapter && emulator.serial_adapter.term) {
+                                            emulator.serial_adapter.term.write("\r\n\x1b[1;31m[!] exit command disabled in root shell.\x1b[0m\r\n");
+                                        }
+                                    }
+                                }
+                            } else if (cmd === "su" || cmd === "sudo" || cmd === "root" || cmd === "pwn") {
+                                isRootUser = true;
                                 if (initialBootDone) {
                                     triggerRootCelebration();
                                 }
@@ -305,6 +322,7 @@
 
         var initialBootDone = false;
         var rootGifShown = false;
+        var isRootUser = false;
 
         function triggerRootCelebration() {
             if (rootGifShown) return;
@@ -443,8 +461,8 @@
             "echo \"PS1='\\\\e[1;31mroot@Spydomain\\\\e[0m:\\\\e[1;34m\\\\w\\\\e[0m\\\\# '\" > /root/.profile",
             "echo \"export TZ='NPT-5:45'\" >> /root/.profile",
             "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /root/.profile",
-            "echo \"alias exit='echo \"[!] exit command disabled in root shell.\"'\" >> /etc/profile",
-            "echo \"alias logout='echo \"[!] logout command disabled in root shell.\"'\" >> /etc/profile",
+            "echo \"alias exit='echo \"[!] exit command disabled in root shell.\"'\" >> /root/.profile",
+            "echo \"alias logout='echo \"[!] logout command disabled in root shell.\"'\" >> /root/.profile",
             "echo \"printf '\\\\033[H\\\\033[2J\\\\033[3J'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;31m'\" >> /root/.profile",
             "echo \"echo '  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ '\" >> /root/.profile",
