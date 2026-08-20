@@ -153,13 +153,12 @@
                     rootGifShown = false;
                 }
 
-                if (!rootGifShown && (clean.includes("/ #") || clean.includes("root@") || clean.slice(-15).includes("#"))) {
+                if (!rootGifShown && (clean.includes("WOAH! YOU GOT ROOT ACCESS") || clean.includes("root@Spydomain"))) {
                     rootGifShown = true;
                     const gifEl = document.getElementById('v86-root-gif');
                     if (gifEl) {
                         gifEl.style.display = 'flex';
                     }
-                    emulator.serial0_send("echo -e '\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\e[0m\\n\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\e[0m\\n\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\e[0m\\n'\n");
                 }
             }
         }
