@@ -78,13 +78,16 @@
                         cursor: '#00ff99',
                         selection: 'rgba(0, 255, 153, 0.3)'
                     });
-                    // Auto-fit terminal columns and rows on container resize
+                    // Auto-fit terminal columns and rows on container resize & inform Linux kernel
                     function fitTerminal() {
                         if (term && screenDiv) {
                             var cols = Math.floor((screenDiv.clientWidth - 10) / 9);
                             var rows = Math.floor((screenDiv.clientHeight - 10) / 17);
                             if (cols > 20 && rows > 5) {
                                 term.resize(cols, rows);
+                                if (emulator && emulator.serial0_send && initialBootDone) {
+                                    emulator.serial0_send("stty cols " + cols + " rows " + rows + " 2>/dev/null\n");
+                                }
                             }
                         }
                     }
@@ -460,6 +463,7 @@
             "chown -R Bikash:Bikash /home/Bikash",
             "echo \"PS1='\\\\e[1;32mBikash@Spydomain\\\\e[0m:\\\\e[1;34m\\\\w\\\\e[0m\\\\$ '\" > /home/Bikash/.profile",
             "echo \"export TZ='NPT-5:45'\" >> /home/Bikash/.profile",
+            "echo \"stty cols 110 rows 25 2>/dev/null\" >> /home/Bikash/.profile",
             "echo \"cd ~/portfolio\" >> /home/Bikash/.profile",
             "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /home/Bikash/.profile",
             "echo \"alias sudo='su - root'\" >> /home/Bikash/.profile",
