@@ -243,9 +243,21 @@
             if (gifEl) {
                 gifEl.style.display = 'flex';
             }
-            setTimeout(function() {
-                emulator.serial0_send("echo -e '\\e[1;31m🚨 [ALERT] SYSTEM COMPROMISED! ROOT PRIVILEGES GRANTED! 🚨\\n\\e[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \\n |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |\\n | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |\\n |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|\\n |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)\\e[0m\\n\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\e[0m\\n\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\e[0m\\n\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\e[0m\\n\\e[1;30m-----------------------------------------------------------------\\e[0m\\n'\n");
-            }, 300);
+            if (emulator.serial_adapter && emulator.serial_adapter.term) {
+                var term = emulator.serial_adapter.term;
+                term.write(
+                    "\r\n\x1b[1;31m🚨 [ALERT] SYSTEM COMPROMISED! ROOT PRIVILEGES GRANTED! 🚨\x1b[0m\r\n" +
+                    "\x1b[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \r\n" +
+                    " |  _ \\ / ___| / ___|_   _| | | | |  / \\  / ___| |/ / ____|  _ \\| |\r\n" +
+                    " | |_) | |  _ | |     | |   | |_| | / _ \\| |   |  /|  _| | |_) | |\r\n" +
+                    " |  _ <| |_| || |___  | |   |  _  |/ ___ \\ |___| . \\| |___|  _ <|_|\r\n" +
+                    " |_| \\_\\____| \\____| |_|   |_| |_/_/   \\_\\____|_|\\_\\_____|_| \\_(_)\x1b[0m\r\n" +
+                    "\x1b[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\x1b[0m\r\n" +
+                    "\x1b[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\x1b[0m\r\n" +
+                    "\x1b[1;36m🏆 You have mastered the Spydomain Terminal challenge!\x1b[0m\r\n" +
+                    "\x1b[1;30m-----------------------------------------------------------------\x1b[0m\r\n\r\n"
+                );
+            }
         }
 
         function onChar(char) {
