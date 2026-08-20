@@ -1200,13 +1200,13 @@ body.menu-open .page-container {
 /* =============================================
    CERTIFICATIONS
 ============================================= */
-.cert-grid {
+.cert-grid, .achievements-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 22px;
 }
 
-.certification-item {
+.certification-item, .achievement-item {
   background: rgba(0,20,10,0.4);
   border-radius: 12px;
   padding: 24px;
@@ -1216,14 +1216,14 @@ body.menu-open .page-container {
   flex-direction: column;
   height: 100%;
 }
-.certification-item:hover {
+.certification-item:hover, .achievement-item:hover {
   transform: translateY(-8px) scale(1.02); 
   box-shadow: 0 15px 35px rgba(0,255,153,0.2);
   border-color: rgba(0,255,153,0.5);
   background: rgba(0,30,15,0.6);
 }
 
-.cert-icon {
+.cert-icon, .achievement-icon {
   width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
   background: rgba(0,255,153,0.08);
@@ -1234,10 +1234,10 @@ body.menu-open .page-container {
   color: #00ff99;
 }
 
-.certification-item h3 { color: #00ff99; margin-bottom: 10px; font-size: 1.15rem; }
-.certification-item p { color: #88ccaa; margin-bottom: 18px; line-height: 1.7; font-size: 0.92rem; flex: 1; }
+.certification-item h3, .achievement-item h3 { color: #00ff99; margin-bottom: 10px; font-size: 1.15rem; }
+.certification-item p, .achievement-item p { color: #88ccaa; margin-bottom: 18px; line-height: 1.7; font-size: 0.92rem; flex: 1; }
 
-.certification-item a { margin-top: auto; width: fit-content; }
+.certification-item a, .achievement-item a { margin-top: auto; width: fit-content; }
 
 /* =============================================
    CONTACT
