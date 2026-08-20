@@ -254,11 +254,9 @@
                 var term = emulator.serial_adapter.term;
                 term.write(
                     "\r\n\x1b[1;31m🚨 [ALERT] SYSTEM COMPROMISED! ROOT PRIVILEGES GRANTED! 🚨\x1b[0m\r\n" +
-                    "\x1b[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \r\n" +
-                    " |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |\r\n" +
-                    " | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |\r\n" +
-                    " |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|\r\n" +
-                    " |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)\x1b[0m\r\n" +
+                    "\x1b[1;31m+-------------------------------------------------------------+\r\n" +
+                    "|                     R O O T   A C C E S S                   |\r\n" +
+                    "+-------------------------------------------------------------+\x1b[0m\r\n" +
                     "\x1b[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\x1b[0m\r\n" +
                     "\x1b[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\x1b[0m\r\n" +
                     "\x1b[1;36m🏆 You have mastered the Spydomain Terminal challenge!\x1b[0m\r\n" +
