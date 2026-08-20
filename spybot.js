@@ -62,7 +62,7 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     "TryHackMe Advent of Cyber 2024",
     "Certified Cybersecurity Educator Professional (CCEP)",
     "Google Cybersecurity Professional Certificate",
-    "CompTIA PenTest+ (PT0-002)",
+    "CompTIA PenTest+ (PT0-002) Course Completed (Coursera)",
     "Certified API Security Analyst",
     "APIsec Certified Practitioner",
     "Certified Red Team Operations Management (CRTOM)",

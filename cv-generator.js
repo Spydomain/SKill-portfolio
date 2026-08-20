@@ -120,8 +120,8 @@ export function generateAndOpenResumePDF() {
     y = addSectionHeader('SKILLS', y);
     
     const skills = [
-      '• Languages: Intermediate HTML, C, Python, CSS, Node.js, React.js, MySQL, Bash, PHP',
-      '• Hacking: Practicing phishing, OSINT, session hacking, learning Pentesting & Bug Bounty'
+      'Languages: Intermediate HTML, C, Python, CSS, Node.js, React.js, MySQL, Bash, PHP',
+      'Hacking: Practicing phishing, OSINT, session hacking, learning Pentesting & Bug Bounty'
     ];
     
     skills.forEach(skill => {
@@ -134,32 +134,32 @@ export function generateAndOpenResumePDF() {
     
     const projects = [
       '1. Keylogger (Python)',
-      '   • Created a keylogger using Python. GitHub: https://github.com/Spydomain/keylogger',
+      '   Created a keylogger using Python. GitHub: https://github.com/Spydomain/keylogger',
       '',
       '2. Bike Rental Nepal (Node.js + React.js)',
-      '   • Frontend: https://github.com/Spydomain/front',
-      '   • Backend: https://github.com/Spydomain/backend',
+      '   Frontend: https://github.com/Spydomain/front',
+      '   Backend: https://github.com/Spydomain/backend',
       '',
       '3. CVE-2023-22809 Automated Exploits (Python)',
-      '   • https://github.com/Spydomain/CVE-2023-22809-automated-python-exploits',
+      '   https://github.com/Spydomain/CVE-2023-22809-automated-python-exploits',
       '',
       '4. ClipboardAI (Bash Script)',
-      '   • https://github.com/Spydomain/ClipboardAI',
+      '   https://github.com/Spydomain/ClipboardAI',
       '',
       '5. NotesVista (Node.js+React.js)',
-      '   • https://notesvista.netlify.app/',
+      '   https://notesvista.netlify.app/',
       '',
       '6. FGE Identification Test Platform (Flutter)',
-      '   • https://army-testgit-45113358-666ec.web.app/',
+      '   https://army-testgit-45113358-666ec.web.app/',
       '',
       '7. CVE-2021-22555 PoC (Python)',
-      '   • https://github.com/Spydomain/CVE-2021-22555-Poc',
+      '   https://github.com/Spydomain/CVE-2021-22555-Poc',
       '',
       '8. CVE-2017-1000112 PoC (Python)',
-      '   • https://github.com/Spydomain/CVE-2017-1000112-PoC',
+      '   https://github.com/Spydomain/CVE-2017-1000112-PoC',
       '',
       '9. CVE-2022-0435 PoC (Python)',
-      '   • https://github.com/Spydomain/CVE-2022-0435-Poc'
+      '   https://github.com/Spydomain/CVE-2022-0435-Poc'
     ];
     
     projects.forEach(project => {
@@ -175,15 +175,15 @@ export function generateAndOpenResumePDF() {
     y = addSectionHeader('ACHIEVEMENTS & CTF', y);
     
     const achievements = [
-      '• 2nd place in Pentester Nepal CTF (2026) as team Visored',
-      '• 8th place in HackAstra finale CTF by Herald College',
-      '• 9th place in Trinity Technology Solo CTF',
-      '• 18th place in HackAstra CTF and qualified for finals',
-      '• 69th place in Midnight CTF',
-      '• Active CTF player as part of Blue Lock Eleven team (Nepal U20)',
-      '• TryHackMe: Top 1% with 500+ days streak',
-      '• Submitted valid bug reports on HackerOne Bug Bounty Program',
-      '• Created custom cybersecurity lab room on TryHackMe'
+      '2nd place in Pentester Nepal CTF (2026) as team Visored',
+      '8th place in HackAstra finale CTF by Herald College',
+      '9th place in Trinity Technology Solo CTF',
+      '18th place in HackAstra CTF and qualified for finals',
+      '69th place in Midnight CTF',
+      'Active CTF player as part of Blue Lock Eleven team (Nepal U20)',
+      'TryHackMe: Top 1% with 500+ days streak',
+      'Submitted valid bug reports on HackerOne Bug Bounty Program',
+      'Created custom cybersecurity lab room on TryHackMe'
     ];
     
     achievements.forEach(ach => {
@@ -195,15 +195,15 @@ export function generateAndOpenResumePDF() {
     y = addSectionHeader('CERTIFICATIONS', y);
     
     const certifications = [
-      '• Cisco Ethical Hacker Certified',
-      '• Certified Cybersecurity Educator Professional (CCEP)',
-      '• Google Cybersecurity Professional Certificate',
-      '• CompTIA PenTest+ (PT0-002)',
-      '• Certified API Security Analyst (CASA)',
-      '• APIsec Certified Practitioner (ACP)',
-      '• Certified Red Team Operations Management (CRTOM)',
-      '• Certified C++ Practitioner Professional (CCPP)',
-      '• Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate'
+      'Cisco Ethical Hacker Certified',
+      'Certified Cybersecurity Educator Professional (CCEP)',
+      'Google Cybersecurity Professional Certificate',
+      'CompTIA PenTest+ (PT0-002) Course Completed (Coursera)',
+      'Certified API Security Analyst (CASA)',
+      'APIsec Certified Practitioner (ACP)',
+      'Certified Red Team Operations Management (CRTOM)',
+      'Certified C++ Practitioner Professional (CCPP)',
+      'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate'
     ];
     
     certifications.forEach(cert => {

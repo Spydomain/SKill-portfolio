@@ -217,7 +217,7 @@
             // Certifications
             "echo '--- CERTIFICATIONS ---' > /home/Bikash/portfolio/certifications.txt",
             "echo '- Google Cybersecurity Professional' >> /home/Bikash/portfolio/certifications.txt",
-            "echo '- CompTIA PenTest+ (PT0-002)' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- CompTIA PenTest+ (PT0-002) Course Completed (Coursera)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Cisco Ethical Hacker' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- CCEP (Certified Cybersecurity Educator Professional)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Certified Red Team Operations Management (CRTOM)' >> /home/Bikash/portfolio/certifications.txt",
