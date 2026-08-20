@@ -77,7 +77,7 @@ export function generateAndOpenResumePDF() {
     doc.text('Bikash Sarraf', margin, y);
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 255);
-    doc.text('bikashsarraf83@gmail.com', pageWidth - margin - 200, y, { maxWidth: 200 });
+    doc.text('contactme@bikashkumarsarraf.com.np', pageWidth - margin - 220, y, { maxWidth: 220 });
     y += lineHeight;
 
     doc.setTextColor(0, 0, 0);

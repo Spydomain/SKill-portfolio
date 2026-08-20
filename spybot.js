@@ -7,7 +7,7 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
   name: "Bikash Sarraf",
   alias: "Spydomain",
   location: "Kathmandu, Nepal",
-  email: "bikashsarraf83@gmail.com",
+  email: "contactme@bikashkumarsarraf.com.np",
   website: "www.bikashkumarsarraf.com.np",
   college: "Softwarica College of IT and E-Commerce, Gyaneshwor, Kathmandu",
   degree: "BSc (Hons) Cybersecurity & Ethical Hacking",

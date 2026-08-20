@@ -229,7 +229,7 @@
 
             // Contact
             "echo '--- CONTACT DETAILS ---' > /home/Bikash/portfolio/contact.txt",
-            "echo 'EMAIL: bikashsarraf83@gmail.com' >> /home/Bikash/portfolio/contact.txt",
+            "echo 'EMAIL: contactme@bikashkumarsarraf.com.np' >> /home/Bikash/portfolio/contact.txt",
             "echo 'GITHUB: github.com/Spydomain' >> /home/Bikash/portfolio/contact.txt",
             "echo 'LINKEDIN: linkedin.com/in/bikash-sarraf-683787320/' >> /home/Bikash/portfolio/contact.txt",
             "echo 'TRYHACKME: tryhackme.com/p/bikashsarraf' >> /home/Bikash/portfolio/contact.txt",
