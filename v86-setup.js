@@ -146,9 +146,14 @@
             buffer += char;
             if (buffer.length > 5000) buffer = buffer.slice(-2000);
 
-            if (state === "DONE" && !rootGifShown) {
+            if (state === "DONE") {
                 var clean = buffer.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "");
-                if (clean.includes("/ #") || clean.includes("root@") || clean.includes("YOU GOT ROOT ACCESS")) {
+                
+                if (clean.slice(-30).includes("Bikash@Spydomain")) {
+                    rootGifShown = false;
+                }
+
+                if (!rootGifShown && (clean.includes("/ #") || clean.includes("root@") || clean.slice(-15).includes("#"))) {
                     rootGifShown = true;
                     const gifEl = document.getElementById('v86-root-gif');
                     if (gifEl) {
