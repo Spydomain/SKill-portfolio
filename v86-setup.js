@@ -202,12 +202,27 @@
             "echo '9. CVE-2017-1000112 PoC: Python-based (github.com/Spydomain/CVE-2017-1000112-PoC)' >> /home/Bikash/portfolio/mywork.txt",
             "echo '10. CVE-2022-0435 PoC: Python-based (github.com/Spydomain/CVE-2022-0435-Poc)' >> /home/Bikash/portfolio/mywork.txt",
 
+            // Achievements & CTF
+            "echo '--- ACHIEVEMENTS & CTF ---' > /home/Bikash/portfolio/achievements.txt",
+            "echo '1. 2nd Place: Pentester Nepal CTF (2026) as team Visored' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '2. 8th Place: HackAstra Finale CTF by Herald College' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '3. 9th Place: Trinity Technology Solo CTF' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '4. 18th Place: HackAstra CTF & qualified for finals' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '5. 69th Place: Midnight CTF' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '6. Blue Lock Eleven CTF Team Member (Nepal U20)' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '7. TryHackMe: Top 1% & 500+ Days Streak' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '8. HackerOne Bug Bounty: Valid Bug Submissions' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '9. TryHackMe Lab Creator: Ganheist Room' >> /home/Bikash/portfolio/achievements.txt",
+
             // Certifications
             "echo '--- CERTIFICATIONS ---' > /home/Bikash/portfolio/certifications.txt",
             "echo '- Google Cybersecurity Professional' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- CompTIA PenTest+ (PT0-002)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Cisco Ethical Hacker' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- CCEP (Certified Cybersecurity Educator Professional)' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- Certified Red Team Operations Management (CRTOM)' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- Certified C++ Practitioner Professional (CCPP)' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- TryHackMe: Pre-Security, Cyber Security 101, Advent of Cyber (2022-2024)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Certified API Security Analyst' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- APIsec Certified Practitioner' >> /home/Bikash/portfolio/certifications.txt",

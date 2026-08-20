@@ -64,7 +64,22 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     "Google Cybersecurity Professional Certificate",
     "CompTIA PenTest+ (PT0-002)",
     "Certified API Security Analyst",
-    "APIsec Certified Practitioner"
+    "APIsec Certified Practitioner",
+    "Certified Red Team Operations Management (CRTOM)",
+    "Certified C++ Practitioner Professional (CCPP)",
+    "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate"
+  ],
+
+  achievements: [
+    "2nd Place — Pentester Nepal CTF (2026) as team Visored",
+    "8th Place — HackAstra Finale CTF by Herald College",
+    "9th Place — Trinity Technology Solo CTF",
+    "18th Place — HackAstra CTF & Qualified for Finals",
+    "69th Place — Midnight CTF",
+    "Blue Lock Eleven CTF Team Member (Nepal U20)",
+    "TryHackMe Top 1% & 500+ Days Streak",
+    "HackerOne Bug Bounty Program (Valid Bug Submissions)",
+    "TryHackMe Lab Creator (Ganheist Room)"
   ],
 
   social: {
@@ -79,16 +94,16 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
   interests: ["CTF challenges", "security vulnerabilities", "open-source security tools", "ethical hacking", "web security", "penetration testing", "bug bounty"],
 
   funFacts: [
-    "Bikash has completed 5 TryHackMe learning paths!",
+    "Bikash has achieved a 500+ days streak on TryHackMe, placing him in the Top 1% globally!",
     "His alias 'Spydomain' reflects his passion for OSINT and digital reconnaissance.",
     "He's built 10 projects spanning Python, Node.js, React, Flutter, and Bash!",
-    "He holds 11 cybersecurity certifications — and counting!",
-    "He's active on both TryHackMe and HackTheBox platforms.",
+    "He holds 14 cybersecurity certifications — including CRTOM, CCPP, and Oracle Cloud AI!",
+    "He won 2nd place in Pentester Nepal CTF (2026) with team Visored!",
+    "He placed 8th in HackAstra Finale CTF and 9th in Trinity Technology Solo CTF!",
+    "He plays active CTFs as part of the Blue Lock Eleven team (Nepal U20).",
     "His ClipboardAI project works completely offline using LLAMA!",
     "He built a CVE exploit tool (CVE-2023-22809) for educational purposes.",
-    "He created an app for the French Army — the FGE Identification Test Platform!",
-    "He started his cybersecurity journey out of pure curiosity.",
-    "He's studying at Softwarica College, one of Nepal's top IT colleges."
+    "He created a custom lab challenge 'Ganheist' on TryHackMe!"
   ]
 };
 
@@ -168,10 +183,18 @@ const INTENTS = [
   },
   {
     id: 'certifications',
-    keywords: ['cert', 'certification', 'certified', 'badge', 'tryhackme', 'cisco', 'google', 'comptia', 'ccep', 'api security'],
+    keywords: ['cert', 'certification', 'certified', 'badge', 'tryhackme', 'cisco', 'google', 'comptia', 'ccep', 'api security', 'crtom', 'ccpp', 'oracle'],
     responses: () => {
       const certList = PORTFOLIO_DATA.certifications.map(c => `  ✅ ${c}`).join('\n');
-      return [`Bikash holds **${PORTFOLIO_DATA.certifications.length} certifications**: 🏅\n\n${certList}\n\nThat's an impressive collection for a current student!`];
+      return [`Bikash holds **${PORTFOLIO_DATA.certifications.length} certifications**: 🏅\n\n${certList}\n\nThat's an impressive collection!`];
+    }
+  },
+  {
+    id: 'achievements',
+    keywords: ['achievement', 'ctf', 'trophy', 'award', 'rank', 'place', 'contest', 'competition', 'hackastra', 'trinity', 'midnight', 'visored', 'blue lock', 'hackerone', 'bug bounty', 'streak', 'ganheist'],
+    responses: () => {
+      const achList = PORTFOLIO_DATA.achievements.map(a => `  🏆 ${a}`).join('\n');
+      return [`Bikash has **${PORTFOLIO_DATA.achievements.length} CTF & Security Achievements**: 🚩\n\n${achList}`];
     }
   },
   {
