@@ -148,17 +148,19 @@
 
             if (state === "DONE") {
                 var clean = buffer.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "");
+                var tail = clean.slice(-40);
                 
-                if (clean.slice(-30).includes("Bikash@Spydomain")) {
+                if (tail.includes("Bikash@Spydomain")) {
                     rootGifShown = false;
-                }
-
-                if (!rootGifShown && (clean.includes("WOAH! YOU GOT ROOT ACCESS") || clean.includes("root@Spydomain"))) {
+                } else if (!rootGifShown && (tail.includes("/ #") || tail.includes("root@"))) {
                     rootGifShown = true;
                     const gifEl = document.getElementById('v86-root-gif');
                     if (gifEl) {
                         gifEl.style.display = 'flex';
                     }
+                    setTimeout(function() {
+                        emulator.serial0_send("echo -e '\\e[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \\n |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |\\n | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |\\n |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|\\n |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)\\e[0m\\n\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\e[0m\\n\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\e[0m\\n\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\e[0m\\n'\n");
+                    }, 200);
                 }
             }
         }
