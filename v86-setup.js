@@ -100,6 +100,7 @@
 
                     // Interactive 8-Direction Drag Resizing Handler
                     var win = document.getElementById("v86-terminal-window");
+                    var termSection = win ? win.closest(".terminal-section") : null;
                     var termContainer = document.getElementById("v86-terminal-container");
                     if (win) {
                         var resizers = win.querySelectorAll(".resizer");
@@ -118,17 +119,23 @@
                                 function onMouseMove(ev) {
                                     if (isR) {
                                         var newWidth = startWidth + (ev.clientX - startX);
-                                        if (newWidth >= 320) win.style.width = newWidth + "px";
+                                        if (newWidth >= 280) {
+                                            win.style.width = newWidth + "px";
+                                            if (termSection) termSection.style.maxWidth = (newWidth + 40) + "px";
+                                        }
                                     } else if (isL) {
                                         var newWidthL = startWidth - (ev.clientX - startX);
-                                        if (newWidthL >= 320) win.style.width = newWidthL + "px";
+                                        if (newWidthL >= 280) {
+                                            win.style.width = newWidthL + "px";
+                                            if (termSection) termSection.style.maxWidth = (newWidthL + 40) + "px";
+                                        }
                                     }
                                     if (isB) {
                                         var newHeight = startHeight + (ev.clientY - startY);
-                                        if (newHeight >= 250 && termContainer) termContainer.style.height = newHeight + "px";
+                                        if (newHeight >= 200 && termContainer) termContainer.style.height = newHeight + "px";
                                     } else if (isT) {
                                         var newHeightT = startHeight - (ev.clientY - startY);
-                                        if (newHeightT >= 250 && termContainer) termContainer.style.height = newHeightT + "px";
+                                        if (newHeightT >= 200 && termContainer) termContainer.style.height = newHeightT + "px";
                                     }
                                     fitTerminal();
                                 }
