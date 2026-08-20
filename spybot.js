@@ -12,7 +12,7 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
   college: "Softwarica College of IT and E-Commerce, Gyaneshwor, Kathmandu",
   degree: "BSc (Hons) Cybersecurity & Ethical Hacking",
   tagline: "Cybersecurity & Ethical Hacking Enthusiast",
-  about: "A passionate cybersecurity student with a strong interest in ethical hacking and web security. His journey in technology started with a curiosity about how things work. He enjoys participating in CTF challenges, learning about new security vulnerabilities, and contributing to open-source security tools. His goal is to become a skilled cybersecurity professional.",
+  about: "A passionate cybersecurity student with a strong interest in ethical hacking and web security. His journey in technology started with a curiosity about how things work. He enjoys participating in CTF challenges, learning about new security vulnerabilities, and contributing to open-source security tools. His goal is to become a skilled website penetration tester.",
 
   education: [
     { title: "BSc (Hons) Cybersecurity & Ethical Hacking", school: "Softwarica College of IT & E-Commerce, Kathmandu", year: "2024 — Present", gpa: "" },
