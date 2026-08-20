@@ -181,8 +181,8 @@ export function generateAndOpenResumePDF() {
       '• 18th place in HackAstra CTF and qualified for finals',
       '• 69th place in Midnight CTF',
       '• Active CTF player as part of Blue Lock Eleven team (Nepal U20) - https://bluelockeleven.team/',
-      '• TryHackMe: Top 1% with 420+ days streak',
-      '• Submitted valid bug reports on HackerOne Bug Bounty Program',
+      '• TryHackMe: Top 1% with 500+ days streak (https://tryhackme.com/p/bikashsarraf)',
+      '• Submitted valid bug reports on HackerOne Bug Bounty Program (https://www.linkedin.com/posts/bikash-sarraf-683787320_bugbounty-cybersecurity-ethicalhacking-activity-7496092306161197058-eZb_)',
       '• Created custom cybersecurity lab on TryHackMe (https://tryhackme.com/jr/ganheist)'
     ];
     
