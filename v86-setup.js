@@ -131,11 +131,17 @@
                 }
             } else if (buffer.indexOf("STATUS_RUNNING") !== -1 && state !== "DONE") {
                 state = "DONE";
+                buffer = ""; // Clear boot setup buffer
                 const statusEl = document.getElementById('v86-status');
                 if (statusEl) {
                     statusEl.innerHTML = '<i class="fas fa-check-circle"></i> RUNNING';
                     statusEl.style.color = '#00ff99';
                 }
+                // Allow 3s window after user prompt loads before enabling root detection
+                setTimeout(function() {
+                    initialBootDone = true;
+                    console.log("V86-SETUP: Initial boot complete. Root detection active.");
+                }, 3000);
             }
             lastBufferLength = buffer.length;
         }, 1000);
@@ -207,13 +213,14 @@
             requestAnimationFrame(render);
         }
 
+        var initialBootDone = false;
         var rootGifShown = false;
         function onChar(char) {
             if (typeof char === "number") char = String.fromCharCode(char);
             buffer += char;
             if (buffer.length > 5000) buffer = buffer.slice(-2000);
 
-            if (state === "DONE") {
+            if (state === "DONE" && initialBootDone) {
                 var clean = buffer.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "");
                 var tail = clean.slice(-40);
                 
