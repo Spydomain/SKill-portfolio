@@ -78,7 +78,22 @@
                         cursor: '#00ff99',
                         selection: 'rgba(0, 255, 153, 0.3)'
                     });
-                    console.log("V86-SETUP: Xterm.js customized successfully");
+                    // Auto-fit terminal columns and rows on container resize
+                    function fitTerminal() {
+                        if (term && screenDiv) {
+                            var cols = Math.floor((screenDiv.clientWidth - 10) / 9);
+                            var rows = Math.floor((screenDiv.clientHeight - 10) / 17);
+                            if (cols > 20 && rows > 5) {
+                                term.resize(cols, rows);
+                            }
+                        }
+                    }
+                    fitTerminal();
+                    window.addEventListener('resize', fitTerminal);
+                    if (window.ResizeObserver) {
+                        var ro = new ResizeObserver(fitTerminal);
+                        ro.observe(screenDiv);
+                    }
 
                     // Monitor user typed commands directly
                     var userTyped = "";

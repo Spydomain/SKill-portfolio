@@ -116,9 +116,9 @@
 
 
       <!-- Secure Native Shell (V86 Real Linux) -->
-      <section class="terminal-section" aria-label="Native Linux Terminal">
-        <div class="terminal-window" style="margin-top: 40px;">
-          <div class="terminal-header" style="background: #111;">
+      <section class="terminal-section" aria-label="Native Linux Terminal" style="max-width: 100%; width: 100%; padding: 0 10px;">
+        <div class="terminal-window" style="margin-top: 20px; width: 100%; resize: vertical; overflow: hidden; min-height: 350px;">
+          <div class="terminal-header" style="background: #111; user-select: none;">
             <span class="traffic light red" onclick="location.reload()" title="Reset Session"
               style="cursor: pointer;"></span>
             <span class="traffic light yellow"></span>
@@ -129,19 +129,7 @@
             </span>
           </div>
           <div class="terminal" id="v86-terminal-container"
-            style="height: 450px; background: #000; position: relative; overflow: hidden;">
-            <div id="v86-root-gif"
-              style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; background: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
-              <div style="background: rgba(10,25,15,0.95); border: 2px solid #00ff99; border-radius: 12px; padding: 16px; text-align: center; max-width: 90%; box-shadow: 0 0 25px rgba(0,255,153,0.4);">
-                <p style="color: #00ff99; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">😱 YOU GOT ROOT ACCESS! 🎉</p>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejhndTU0YWZxeHg4eXlnNnFvbzY3bGE3YmRuZHUyNnpueG9wM3FlbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/iXbnkZTxCo4t8l8mxK/giphy.gif"
-                  alt="Root Access Celebration GIF" style="max-width: 100%; max-height: 240px; border-radius: 8px; margin: 0 auto; display: block; border: 1px solid rgba(0,255,153,0.3);" />
-                <button onclick="document.getElementById('v86-root-gif').style.display='none'"
-                  style="margin-top: 12px; background: #00ff99; color: #000; border: none; padding: 6px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.2s;">
-                  Dismiss ✖
-                </button>
-              </div>
-            </div>
+            style="height: calc(100% - 40px); min-height: 380px; width: 100%; background: #000; position: relative; overflow: hidden; padding: 4px;">
             <div id="v86-loading"
               style="color: #0f0; padding: 20px; font-family: 'Roboto Mono', monospace; text-align: center; cursor: pointer;">
               <p style="font-size: 1.1rem; margin-bottom: 10px;">🛡️ SPYDOMAIN SECURE SHELL</p>
