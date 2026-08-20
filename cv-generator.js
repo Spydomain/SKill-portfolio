@@ -207,7 +207,7 @@ export function generateAndOpenResumePDF() {
       '• Certified API Security Analyst',
       '• APIsec Certified Practitioner',
       '• Certified Red Team Operations Management (CRTOM)',
-      '• Certified C++ Practitioner (CCP)',
+      '• Certified C++ Practitioner Professional (CCPP)',
       '• Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate'
     ];
     
