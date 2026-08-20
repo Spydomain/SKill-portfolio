@@ -389,7 +389,7 @@
             "echo 'TAGLINE: Cybersecurity & Ethical Hacking Enthusiast' >> /home/Bikash/portfolio/aboutme.txt",
             "echo 'LOCATION: Kathmandu, Nepal' >> /home/Bikash/portfolio/aboutme.txt",
             "echo 'COLLEGE: Softwarica College of IT and E-Commerce, Gyaneshwor, Kathmandu Nepal' >> /home/Bikash/portfolio/aboutme.txt",
-            "echo 'ABOUT: I am passionate about learning new things in technology, especially cybersecurity, ethical hacking, and web development. I enjoy tackling challenges and continuously developing my skills.' >> /home/Bikash/portfolio/aboutme.txt",
+            "echo 'ABOUT: I am passionate about learning new things in technology, especially cybersecurity, ethical hacking, and website penetration testing. I enjoy tackling challenges and continuously developing my skills.' >> /home/Bikash/portfolio/aboutme.txt",
             "echo 'GOAL: To become a skilled cybersecurity professional and help make the digital world a safer place.' >> /home/Bikash/portfolio/aboutme.txt",
 
             // Education
