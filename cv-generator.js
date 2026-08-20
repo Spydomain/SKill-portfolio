@@ -38,9 +38,8 @@ export function generateAndOpenResumePDF() {
 
     // Add text with formatting and automatic page breaks
     function addText(text, x, yPos, options = {}) {
-      doc.setTextColor(0, 0, 0);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(11);
+      doc.setFont('helvetica', options.fontStyle || 'normal');
+      doc.setFontSize(options.fontSize || 11);
       
       // Check if we need a new page (leaving space for section headers and margins)
       if (yPos > doc.internal.pageSize.getHeight() - 100) {
@@ -53,13 +52,37 @@ export function generateAndOpenResumePDF() {
       const splitText = doc.splitTextToSize(text, maxWidth);
       
       // Add each line of text
-      splitText.forEach((line, i) => {
+      splitText.forEach((line) => {
         // Check if we need a new page for this line
         if (yPos > doc.internal.pageSize.getHeight() - 30) {
           doc.addPage();
           yPos = margin + 20;
         }
-        doc.text(line, x, yPos, options);
+
+        const urlMatch = line.match(/(https?:\/\/[^\s]+)/);
+        if (urlMatch) {
+          const url = urlMatch[0];
+          const parts = line.split(url);
+          let currentX = x;
+          
+          if (parts[0]) {
+            doc.setTextColor(0, 0, 0);
+            doc.text(parts[0], currentX, yPos);
+            currentX += doc.getTextWidth(parts[0]);
+          }
+          
+          doc.setTextColor(0, 0, 255);
+          doc.text(url, currentX, yPos);
+          currentX += doc.getTextWidth(url);
+          
+          if (parts[1]) {
+            doc.setTextColor(0, 0, 0);
+            doc.text(parts[1], currentX, yPos);
+          }
+        } else {
+          doc.setTextColor(0, 0, 0);
+          doc.text(line, x, yPos, options);
+        }
         yPos += lineHeight;
       });
       
