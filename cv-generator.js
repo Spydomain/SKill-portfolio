@@ -121,7 +121,7 @@ export function generateAndOpenResumePDF() {
     
     const skills = [
       'Languages: Intermediate HTML, C, Python, CSS, Node.js, React.js, MySQL, Bash, PHP',
-      'Hacking: Practicing phishing, OSINT, session hacking, learning Pentesting & Bug Bounty'
+      'Hacking: Social Engineering, OSINT, session hacking, learning Pentesting & Bug Bounty'
     ];
     
     skills.forEach(skill => {
