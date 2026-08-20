@@ -12,8 +12,15 @@
         }
         console.log("V86-SETUP: Container found");
 
-        // Replace placeholder content with xterm target div
-        screenContainer.innerHTML = '<div id="v86-screen" style="width:100%;height:100%;"></div>';
+        // Replace placeholder content with xterm target div & root GIF overlay modal
+        screenContainer.innerHTML = '<div id="v86-screen" style="width:100%;height:100%;"></div>' +
+            '<div id="v86-root-gif" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; background: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(4px);">' +
+            '  <div style="background: rgba(10,25,15,0.95); border: 2px solid #00ff99; border-radius: 12px; padding: 16px; text-align: center; max-width: 90%; box-shadow: 0 0 25px rgba(0,255,153,0.4);">' +
+            '    <p style="color: #00ff99; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">😱 YOU GOT ROOT ACCESS! 🎉</p>' +
+            '    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejhndTU0YWZxeHg4eXlnNnFvbzY3bGE3YmRuZHUyNnpueG9wM3FlbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/iXbnkZTxCo4t8l8mxK/giphy.gif" alt="Root Access Celebration GIF" style="max-width: 100%; max-height: 240px; border-radius: 8px; margin: 0 auto; display: block; border: 1px solid rgba(0,255,153,0.3);" />' +
+            '    <button onclick="document.getElementById(\'v86-root-gif\').style.display=\'none\'" style="margin-top: 12px; background: #00ff99; color: #000; border: none; padding: 6px 18px; border-radius: 6px; font-weight: bold; cursor: pointer;">Dismiss ✖</button>' +
+            '  </div>' +
+            '</div>';
 
         // Wait for V86 constructor to be available
         var attempts = 0;
@@ -248,10 +255,10 @@
                 term.write(
                     "\r\n\x1b[1;31m🚨 [ALERT] SYSTEM COMPROMISED! ROOT PRIVILEGES GRANTED! 🚨\x1b[0m\r\n" +
                     "\x1b[1;31m  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ \r\n" +
-                    " |  _ \\ / ___| / ___|_   _| | | | |  / \\  / ___| |/ / ____|  _ \\| |\r\n" +
-                    " | |_) | |  _ | |     | |   | |_| | / _ \\| |   |  /|  _| | |_) | |\r\n" +
-                    " |  _ <| |_| || |___  | |   |  _  |/ ___ \\ |___| . \\| |___|  _ <|_|\r\n" +
-                    " |_| \\_\\____| \\____| |_|   |_| |_/_/   \\_\\____|_|\\_\\_____|_| \\_(_)\x1b[0m\r\n" +
+                    " |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |\r\n" +
+                    " | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |\r\n" +
+                    " |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|\r\n" +
+                    " |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)\x1b[0m\r\n" +
                     "\x1b[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\x1b[0m\r\n" +
                     "\x1b[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\x1b[0m\r\n" +
                     "\x1b[1;36m🏆 You have mastered the Spydomain Terminal challenge!\x1b[0m\r\n" +
