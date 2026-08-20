@@ -306,7 +306,7 @@
         function triggerRootCelebration() {
             if (rootGifShown) return;
             rootGifShown = true;
-            console.log("V86-SETUP: Triggering root celebration & party buffer");
+            console.log("V86-SETUP: Triggering ONE-TIME root celebration & party buffer");
             launchPartyConfetti();
             var gifEl = document.getElementById('v86-root-gif');
             if (gifEl) {
@@ -325,6 +325,8 @@
                     "\x1b[1;30m-----------------------------------------------------------------\x1b[0m\r\n\r\n"
                 );
             }
+            // Permanently disable exit command in root shell
+            emulator.serial0_send("alias exit='echo \"[!] exit command disabled in root shell.\"' ; alias logout='echo \"[!] logout command disabled in root shell.\"' \n");
         }
 
         function onChar(char) {
@@ -332,13 +334,11 @@
             buffer += char;
             if (buffer.length > 5000) buffer = buffer.slice(-2000);
 
-            if (state === "DONE" && initialBootDone) {
+            if (state === "DONE" && initialBootDone && !rootGifShown) {
                 var clean = buffer.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "");
                 var tail = clean.slice(-100);
                 
-                if (tail.includes("Bikash@Spydomain")) {
-                    rootGifShown = false;
-                } else if (!rootGifShown && (tail.includes("/ #") || tail.includes("root@") || tail.includes("exit"))) {
+                if (tail.includes("/ #") || tail.includes("root@")) {
                     triggerRootCelebration();
                 }
             }
