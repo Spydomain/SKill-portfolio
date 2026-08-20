@@ -189,18 +189,18 @@
             "echo 'LANGUAGES: HTML/CSS (75%), Python (70%), JS/Node.js (65%), Bash (65%), React.js (55%), C (50%)' >> /home/Bikash/portfolio/skills.txt",
             "echo 'SECURITY: OSINT (70%), Web Sec (65%), PenTest (60%), Network Sec (55%), Bug Bounty (45%)' >> /home/Bikash/portfolio/skills.txt",
 
-            // My Work / Projects
-            "echo '--- PROJECTS ---' > /home/Bikash/portfolio/mywork.txt",
-            "echo '1. Keylogger: Python-based educational keylogger (github.com/Spydomain/keylogger)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '2. Bike Rental Nepal: Full-stack MERN platform (github.com/Spydomain/front)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '3. CVE-2023-22809 Exploits: Automated Python exploits (github.com/Spydomain/CVE-2023-22809-automated-python-exploits)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '4. ClipboardAI: Bash-based offline LLM assistant (github.com/Spydomain/ClipboardAI)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '5. NotesVista: Note-taking app (notesvista.netlify.app)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '6. NebullaComms: Communication app (nebullacomms.netlify.app)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '7. FGE Identification Test Platform: Flutter app (army-testgit-45113358-666ec.web.app)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '8. CVE-2021-22555 PoC: Python-based (github.com/Spydomain/CVE-2021-22555-Poc)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '9. CVE-2017-1000112 PoC: Python-based (github.com/Spydomain/CVE-2017-1000112-PoC)' >> /home/Bikash/portfolio/mywork.txt",
-            "echo '10. CVE-2022-0435 PoC: Python-based (github.com/Spydomain/CVE-2022-0435-Poc)' >> /home/Bikash/portfolio/mywork.txt",
+            // Projects
+            "echo '--- PROJECTS ---' > /home/Bikash/portfolio/projects.txt",
+            "echo '1. Keylogger: Python-based educational keylogger (github.com/Spydomain/keylogger)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '2. Bike Rental Nepal: Full-stack MERN platform (github.com/Spydomain/front)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '3. CVE-2023-22809 Exploits: Automated Python exploits (github.com/Spydomain/CVE-2023-22809-automated-python-exploits)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '4. ClipboardAI: Bash-based offline LLM assistant (github.com/Spydomain/ClipboardAI)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '5. NotesVista: Note-taking app (notesvista.netlify.app)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '6. NebullaComms: Communication app (nebullacomms.netlify.app)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '7. FGE Identification Test Platform: Flutter app (army-testgit-45113358-666ec.web.app)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '8. CVE-2021-22555 PoC: Python-based (github.com/Spydomain/CVE-2021-22555-Poc)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '9. CVE-2017-1000112 PoC: Python-based (github.com/Spydomain/CVE-2017-1000112-PoC)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '10. CVE-2022-0435 PoC: Python-based (github.com/Spydomain/CVE-2022-0435-Poc)' >> /home/Bikash/portfolio/projects.txt",
 
             // Achievements & CTF
             "echo '--- ACHIEVEMENTS & CTF ---' > /home/Bikash/portfolio/achievements.txt",
@@ -234,9 +234,6 @@
             "echo 'LINKEDIN: linkedin.com/in/bikash-sarraf-683787320/' >> /home/Bikash/portfolio/contact.txt",
             "echo 'TRYHACKME: tryhackme.com/p/bikashsarraf' >> /home/Bikash/portfolio/contact.txt",
             "echo 'MEDIUM: medium.com/@spydomain1' >> /home/Bikash/portfolio/contact.txt",
-
-            // Backward compatibility
-            "cp /home/Bikash/portfolio/mywork.txt /home/Bikash/portfolio/projects.txt",
             
             // Timezone: Asia/Kathmandu (UTC+5:45)
             "echo 'Asia/Kathmandu' > /etc/timezone",
