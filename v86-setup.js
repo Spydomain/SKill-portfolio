@@ -140,10 +140,19 @@
             lastBufferLength = buffer.length;
         }, 1000);
 
+        var rootGifShown = false;
         function onChar(char) {
             if (typeof char === "number") char = String.fromCharCode(char);
             buffer += char;
             if (buffer.length > 5000) buffer = buffer.slice(-2000);
+
+            if (state === "DONE" && !rootGifShown && (buffer.includes("root@Spydomain") || buffer.includes("YOU GOT ROOT ACCESS"))) {
+                rootGifShown = true;
+                const gifEl = document.getElementById('v86-root-gif');
+                if (gifEl) {
+                    gifEl.style.display = 'flex';
+                }
+            }
         }
 
         emulator.add_listener("serial0-output-char", function(char) {
@@ -241,7 +250,6 @@
 
             // Root Easter Egg & Privilege Escalation Setup
             "passwd -d root",
-            "echo 'THM{Spydomain_Root_Pwned_2026!}' > /root/flag.txt",
             "echo \"PS1='\\\\e[1;31mroot@Spydomain\\\\e[0m:\\\\e[1;34m\\\\w\\\\e[0m\\\\# '\" > /root/.profile",
             "echo \"export TZ='NPT-5:45'\" >> /root/.profile",
             "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /root/.profile",
@@ -256,7 +264,6 @@
             "echo \"echo -e '\\\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\\\e[0m'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\\\e[0m'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\\\e[0m'\" >> /root/.profile",
-            "echo \"echo -e '\\\\e[1;35m🚩 ROOT FLAG: THM{Spydomain_Root_Pwned_2026!}\\\\e[0m'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;30m---------------------------------------------------------\\\\e[0m'\" >> /root/.profile",
             "echo \"echo ''\" >> /root/.profile",
 
