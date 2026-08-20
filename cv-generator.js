@@ -186,8 +186,8 @@ export function generateAndOpenResumePDF() {
       'Created custom cybersecurity lab room on TryHackMe'
     ];
     
-    achievements.forEach(ach => {
-      y = addText(ach, margin, y);
+    achievements.forEach((ach, index) => {
+      y = addText(`${index + 1}. ${ach}`, margin, y);
     });
     y += 10;
 
@@ -206,8 +206,8 @@ export function generateAndOpenResumePDF() {
       'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate'
     ];
     
-    certifications.forEach(cert => {
-      y = addText(cert, margin, y);
+    certifications.forEach((cert, index) => {
+      y = addText(`${index + 1}. ${cert}`, margin, y);
     });
     y += 20;
 
