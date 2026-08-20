@@ -259,9 +259,8 @@
             "sed -i 's|:fault non-root user$|:/bin/sh|' /etc/passwd",
             "sed -i 's|Bikash:x:1001:1001:.*:/home/Bikash:.*|Bikash:x:1001:1001:Bikash:/home/Bikash:/bin/sh|' /etc/passwd",
             "chown -R 1001:1001 /home/Bikash",
-            "su - Bikash",
             "echo STATUS_RUNNING",
-            "clear"
+            "su - Bikash"
         ];
         
         var delay = 500;
