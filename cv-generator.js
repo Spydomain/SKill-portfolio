@@ -175,15 +175,15 @@ export function generateAndOpenResumePDF() {
     y = addSectionHeader('ACHIEVEMENTS & CTF', y);
     
     const achievements = [
-      '• 2nd place in Pentester Nepal CTF (2026) as team Visored (https://lnkd.in/pQP_2w3h)',
+      '• 2nd place in Pentester Nepal CTF (2026) as team Visored',
       '• 8th place in HackAstra finale CTF by Herald College',
-      '• 9th place in Trinity Technology Solo CTF (https://www.linkedin.com/posts/bikash-sarraf-683787320_cybersecurity-ctf-informationsecurity-activity-7428407541136547840-aUxK)',
+      '• 9th place in Trinity Technology Solo CTF',
       '• 18th place in HackAstra CTF and qualified for finals',
       '• 69th place in Midnight CTF',
-      '• Active CTF player as part of Blue Lock Eleven team (Nepal U20) - https://bluelockeleven.team/',
-      '• TryHackMe: Top 1% with 500+ days streak (https://tryhackme.com/p/bikashsarraf)',
-      '• Submitted valid bug reports on HackerOne Bug Bounty Program (https://www.linkedin.com/posts/bikash-sarraf-683787320_bugbounty-cybersecurity-ethicalhacking-activity-7496092306161197058-eZb_)',
-      '• Created custom cybersecurity lab on TryHackMe (https://tryhackme.com/jr/ganheist)'
+      '• Active CTF player as part of Blue Lock Eleven team (Nepal U20)',
+      '• TryHackMe: Top 1% with 500+ days streak',
+      '• Submitted valid bug reports on HackerOne Bug Bounty Program',
+      '• Created custom cybersecurity lab room on TryHackMe'
     ];
     
     achievements.forEach(ach => {
@@ -195,17 +195,12 @@ export function generateAndOpenResumePDF() {
     y = addSectionHeader('CERTIFICATIONS', y);
     
     const certifications = [
-      '• TryHackMe Presecurity Certified',
-      '• TryHackMe Cyber Security 101 Certified',
-      '• TryHackMe Advent of Cyber 2022 Certified',
-      '• TryHackMe Advent of Cyber 2023 Certified',
-      '• TryHackMe Advent of Cyber 2024 Certified',
       '• Cisco Ethical Hacker Certified',
       '• Certified Cybersecurity Educator Professional (CCEP)',
       '• Google Cybersecurity Professional Certificate',
       '• CompTIA PenTest+ (PT0-002)',
-      '• Certified API Security Analyst',
-      '• APIsec Certified Practitioner',
+      '• Certified API Security Analyst (CASA)',
+      '• APIsec Certified Practitioner (ACP)',
       '• Certified Red Team Operations Management (CRTOM)',
       '• Certified C++ Practitioner Professional (CCPP)',
       '• Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate'
