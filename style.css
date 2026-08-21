@@ -1237,7 +1237,8 @@ body.menu-open .page-container {
 .certification-item h3, .achievement-item h3 { color: #00ff99; margin-bottom: 10px; font-size: 1.15rem; }
 .certification-item p, .achievement-item p { color: #88ccaa; margin-bottom: 18px; line-height: 1.7; font-size: 0.92rem; flex: 1; }
 
-.certification-item a, .achievement-item a { margin-top: auto; width: fit-content; }
+.certification-item a, .achievement-item > a, .achievement-links { margin-top: auto; width: fit-content; }
+.achievement-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* =============================================
    CONTACT

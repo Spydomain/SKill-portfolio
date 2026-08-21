@@ -396,6 +396,7 @@
             "echo '- TryHackMe: Pre-Security, Cyber Security 101, Advent of Cyber (2022-2024)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Certified API Security Analyst' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- APIsec Certified Practitioner' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- Hack The Box Mini Pro Labs: Mythical' >> /home/Bikash/portfolio/certifications.txt",
 
             // Contact
             "echo '--- CONTACT DETAILS ---' > /home/Bikash/portfolio/contact.txt",

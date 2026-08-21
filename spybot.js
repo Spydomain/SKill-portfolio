@@ -67,7 +67,8 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     "APIsec Certified Practitioner",
     "Certified Red Team Operations Management (CRTOM)",
     "Certified C++ Practitioner Professional (CCPP)",
-    "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate"
+    "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    "Hack The Box Mini Pro Labs: Mythical"
   ],
 
   achievements: [
@@ -97,7 +98,7 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     "Bikash has achieved a 500+ days streak on TryHackMe, placing him in the Top 1% globally!",
     "His alias 'Spydomain' reflects his passion for OSINT and digital reconnaissance.",
     "He's built 10 projects spanning Python, Node.js, React, Flutter, and Bash!",
-    "He holds 14 cybersecurity certifications — including CRTOM, CCPP, and Oracle Cloud AI!",
+    "He holds 15 cybersecurity certifications — including CRTOM, CCPP, HTB Mythical, and Oracle Cloud AI!",
     "He won 2nd place in Pentester Nepal CTF (2026) with team Visored!",
     "He placed 8th in HackAstra Finale CTF and 9th in Trinity Technology Solo CTF!",
     "He plays active CTFs as part of the Blue Lock Eleven team (Nepal U20).",
@@ -183,7 +184,7 @@ const INTENTS = [
   },
   {
     id: 'certifications',
-    keywords: ['cert', 'certification', 'certified', 'badge', 'tryhackme', 'cisco', 'google', 'comptia', 'ccep', 'api security', 'crtom', 'ccpp', 'oracle'],
+    keywords: ['cert', 'certification', 'certified', 'badge', 'tryhackme', 'hackthebox', 'htb', 'mythical', 'cisco', 'google', 'comptia', 'ccep', 'api security', 'crtom', 'ccpp', 'oracle'],
     responses: () => {
       const certList = PORTFOLIO_DATA.certifications.map(c => `  ✅ ${c}`).join('\n');
       return [`Bikash holds **${PORTFOLIO_DATA.certifications.length} certifications**: 🏅\n\n${certList}\n\nThat's an impressive collection!`];
@@ -225,7 +226,7 @@ const INTENTS = [
     id: 'experience',
     keywords: ['experience', 'work', 'job', 'intern', 'career', 'employ'],
     responses: () => [
-      `Bikash is currently a **student** focusing on building his skills and portfolio. 🎓\n\nWhile he doesn't have formal work experience yet, he has:\n- 🚀 Built **10 real-world projects**\n- 🏅 Earned **11 certifications**\n- 🔒 Active on **TryHackMe** & **HackTheBox**\n- 🛠️ Created actual **CVE exploit tools**\n\nHe's actively seeking cybersecurity opportunities!`
+      `Bikash is currently a **student** focusing on building his skills and portfolio. 🎓\n\nWhile he doesn't have formal work experience yet, he has:\n- 🚀 Built **10 real-world projects**\n- 🏅 Earned **15 certifications**\n- 🔒 Active on **TryHackMe** & **HackTheBox**\n- 🛠️ Created actual **CVE exploit tools**\n\nHe's actively seeking cybersecurity opportunities!`
     ]
   },
   {

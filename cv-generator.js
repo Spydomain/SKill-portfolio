@@ -226,7 +226,8 @@ export function generateAndOpenResumePDF() {
       'APIsec Certified Practitioner (ACP)',
       'Certified Red Team Operations Management (CRTOM)',
       'Certified C++ Practitioner Professional (CCPP)',
-      'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate'
+      'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
+      'Hack The Box Mini Pro Labs: Mythical Certificate of Completion'
     ];
     
     certifications.forEach((cert, index) => {
