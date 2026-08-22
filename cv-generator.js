@@ -227,7 +227,8 @@ export function generateAndOpenResumePDF() {
       'Certified Red Team Operations Management (CRTOM)',
       'Certified C++ Practitioner Professional (CCPP)',
       'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
-      'Hack The Box Mini Pro Labs: Mythical Certificate of Completion'
+      'Hack The Box Mini Pro Labs: Mythical Certificate of Completion',
+      'Hack The Box Mini Pro Labs: Puppet Certificate of Completion'
     ];
     
     certifications.forEach((cert, index) => {

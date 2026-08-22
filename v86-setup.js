@@ -397,6 +397,7 @@
             "echo '- Certified API Security Analyst' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- APIsec Certified Practitioner' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Hack The Box Mini Pro Labs: Mythical' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- Hack The Box Mini Pro Labs: Puppet' >> /home/Bikash/portfolio/certifications.txt",
 
             // Contact
             "echo '--- CONTACT DETAILS ---' > /home/Bikash/portfolio/contact.txt",
