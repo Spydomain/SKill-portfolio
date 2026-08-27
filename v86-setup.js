@@ -366,7 +366,7 @@
             "echo '3. CVE-2023-22809 Exploits: Automated Python exploits (github.com/Spydomain/CVE-2023-22809-automated-python-exploits)' >> /home/Bikash/portfolio/projects.txt",
             "echo '4. ClipboardAI: Bash-based offline LLM assistant (github.com/Spydomain/ClipboardAI)' >> /home/Bikash/portfolio/projects.txt",
             "echo '5. NotesVista: Note-taking app (notesvista.netlify.app)' >> /home/Bikash/portfolio/projects.txt",
-            "echo '6. NebullaComms: Communication app (nebullacomms.netlify.app)' >> /home/Bikash/portfolio/projects.txt",
+            "echo '6. NebullaComms: MERN app for chats, audio/video calls (nebullacomms.netlify.app)' >> /home/Bikash/portfolio/projects.txt",
             "echo '7. FGE Identification Test Platform: Flutter app (army-testgit-45113358-666ec.web.app)' >> /home/Bikash/portfolio/projects.txt",
             "echo '8. CVE-2021-22555 PoC: Python-based (github.com/Spydomain/CVE-2021-22555-Poc)' >> /home/Bikash/portfolio/projects.txt",
             "echo '9. CVE-2017-1000112 PoC: Python-based (github.com/Spydomain/CVE-2017-1000112-PoC)' >> /home/Bikash/portfolio/projects.txt",

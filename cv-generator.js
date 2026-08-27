@@ -172,16 +172,19 @@ export function generateAndOpenResumePDF() {
       '5. NotesVista (Node.js+React.js)',
       '   https://notesvista.netlify.app/',
       '',
-      '6. FGE Identification Test Platform (Flutter)',
+      '6. NebullaComms (Node.js+React.js)',
+      '   https://nebullacomms.netlify.app/',
+      '',
+      '7. FGE Identification Test Platform (Flutter)',
       '   https://army-testgit-45113358-666ec.web.app/',
       '',
-      '7. CVE-2021-22555 PoC (Python)',
+      '8. CVE-2021-22555 PoC (Python)',
       '   https://github.com/Spydomain/CVE-2021-22555-Poc',
       '',
-      '8. CVE-2017-1000112 PoC (Python)',
+      '9. CVE-2017-1000112 PoC (Python)',
       '   https://github.com/Spydomain/CVE-2017-1000112-PoC',
       '',
-      '9. CVE-2022-0435 PoC (Python)',
+      '10. CVE-2022-0435 PoC (Python)',
       '   https://github.com/Spydomain/CVE-2022-0435-Poc'
     ];
     

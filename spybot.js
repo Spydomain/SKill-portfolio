@@ -46,7 +46,7 @@ const PORTFOLIO_DATA = window.PORTFOLIO_DATA = {
     { name: "CVE-2023-22809 Exploits", tech: "Python", desc: "Automated exploits for CVE-2023-22809 vulnerability", link: "github.com/Spydomain/CVE-2023-22809-automated-python-exploits" },
     { name: "ClipboardAI", tech: "Bash", desc: "Sends copied text to LLAMA and pops up instant offline answers", link: "github.com/Spydomain/ClipboardAI" },
     { name: "NotesVista", tech: "MERN Stack", desc: "Modern note-taking application", link: "notesvista.netlify.app" },
-    { name: "NebullaComms", tech: "MERN Stack", desc: "Modern communication application", link: "nebullacomms.netlify.app" },
+    { name: "NebullaComms", tech: "Node.js, React (MERN Stack)", desc: "Modern communication application supporting chats, audio & video calls, and more", link: "nebullacomms.netlify.app" },
     { name: "FGE Identification Test Platform", tech: "Flutter", desc: "Test-taking app for French Army", link: "army-testgit-45113358-666ec.web.app" },
     { name: "CVE-2021-22555 PoC", tech: "Python", desc: "Proof of Concept for CVE-2021-22555 vulnerability", link: "github.com/Spydomain/CVE-2021-22555-Poc" },
     { name: "CVE-2017-1000112 PoC", tech: "Python", desc: "Proof of Concept for CVE-2017-1000112 vulnerability", link: "github.com/Spydomain/CVE-2017-1000112-PoC" },
