@@ -13,7 +13,7 @@
         console.log("V86-SETUP: Container found");
 
         // Replace placeholder content with xterm target div & root GIF overlay modal
-        screenContainer.innerHTML = '<div id="v86-screen" style="width:100%;height:100%;"></div>' +
+        screenContainer.innerHTML = '<div id="v86-screen"></div>' +
             '<div id="v86-root-gif" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; background: rgba(0,0,0,0.85); flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(4px);">' +
             '  <div style="background: rgba(10,25,15,0.95); border: 2px solid #00ff99; border-radius: 12px; padding: 16px; text-align: center; max-width: 90%; box-shadow: 0 0 25px rgba(0,255,153,0.4);">' +
             '    <p style="color: #00ff99; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">😱 YOU GOT ROOT ACCESS! 🎉</p>' +
@@ -51,6 +51,7 @@
         }
 
         // Create emulator using xterm.js serial container
+        var fitTerminal;
         var emulator;
         try {
             emulator = new V86({
@@ -78,19 +79,19 @@
                         cursor: '#00ff99',
                         selection: 'rgba(0, 255, 153, 0.3)'
                     });
-                    // Auto-fit terminal columns and rows on container resize & inform Linux kernel
-                    function fitTerminal() {
-                        if (term && screenDiv) {
-                            var cols = Math.floor((screenDiv.clientWidth - 10) / 9);
-                            var rows = Math.floor((screenDiv.clientHeight - 10) / 17);
-                            if (cols > 20 && rows > 5) {
-                                term.resize(cols, rows);
-                                if (emulator && emulator.serial0_send && initialBootDone) {
-                                    emulator.serial0_send("stty cols " + cols + " rows " + rows + " 2>/dev/null\n");
-                                }
-                            }
-                        }
+                    // Use xterm's fit addon so its final row stays inside the viewport.
+                    var fitAddon = window.FitAddon && new window.FitAddon.FitAddon();
+                    if (!fitAddon) {
+                        console.error('V86-SETUP: xterm fit addon not found');
+                        return;
                     }
+                    term.loadAddon(fitAddon);
+                    fitTerminal = function() {
+                        if (!screenDiv.clientWidth || !screenDiv.clientHeight) return;
+                        fitAddon.fit();
+                        var viewport = term.element.querySelector('.xterm-viewport');
+                        if (viewport) viewport.scrollLeft = 0;
+                    };
                     fitTerminal();
                     window.addEventListener('resize', fitTerminal);
                     if (window.ResizeObserver) {
@@ -200,6 +201,7 @@
                 // Allow 3s window after user prompt loads before enabling root detection
                 setTimeout(function() {
                     initialBootDone = true;
+                    if (fitTerminal) fitTerminal();
                     console.log("V86-SETUP: Initial boot complete. Root detection active.");
                 }, 3000);
             }
@@ -286,19 +288,6 @@
             if (gifEl) {
                 gifEl.style.display = 'flex';
             }
-            if (emulator.serial_adapter && emulator.serial_adapter.term) {
-                var term = emulator.serial_adapter.term;
-                term.write(
-                    "\r\n\x1b[1;31m🚨 [ALERT] SYSTEM COMPROMISED! ROOT PRIVILEGES GRANTED! 🚨\x1b[0m\r\n" +
-                    "\x1b[1;31m+-------------------------------------------------------------+\r\n" +
-                    "|                     R O O T   A C C E S S                   |\r\n" +
-                    "+-------------------------------------------------------------+\x1b[0m\r\n" +
-                    "\x1b[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\x1b[0m\r\n" +
-                    "\x1b[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\x1b[0m\r\n" +
-                    "\x1b[1;36m🏆 You have mastered the Spydomain Terminal challenge!\x1b[0m\r\n" +
-                    "\x1b[1;30m-----------------------------------------------------------------\x1b[0m\r\n\r\n"
-                );
-            }
         }
 
         function onChar(char) {
@@ -318,19 +307,15 @@
 
         emulator.add_listener("serial0-output-char", function(char) {
             onChar(char);
-            if (emulator.serial_adapter && emulator.serial_adapter.term) {
-                emulator.serial_adapter.term.scrollToBottom();
-            }
         });
         emulator.add_listener("serial0-output-byte", function(char) {
             onChar(char);
-            if (emulator.serial_adapter && emulator.serial_adapter.term) {
-                emulator.serial_adapter.term.scrollToBottom();
-            }
         });
     }
 
     function injectData(emulator) {
+        var terminal = emulator.serial_adapter && emulator.serial_adapter.term;
+        var wrapWidth = Math.max(18, Math.min(72, (terminal ? terminal.cols : 80) - 2));
         var cmds = [
             "hostname Spydomain",
             "adduser -D -s /bin/sh Bikash",
@@ -348,11 +333,11 @@
             // Education
             "echo '--- EDUCATION TIMELINE ---' > /home/Bikash/portfolio/education.txt",
             "echo '2024 — Present: Bachelor in Cyber Security and Ethical Hacking' >> /home/Bikash/portfolio/education.txt",
-            "echo '   Softwarica College of IT & E-Commerce, Kathmandu Nepal' >> /home/Bikash/portfolio/education.txt",
+            "echo '   Softwarica College of IT & E-Commerce, Gyaneshwor, Kathmandu Nepal' >> /home/Bikash/portfolio/education.txt",
             "echo '2022 — 2024: +2 Science (Biology) - GPA: 3.08' >> /home/Bikash/portfolio/education.txt",
             "echo '   Xavier International College, Kalopul, Kathmandu Nepal' >> /home/Bikash/portfolio/education.txt",
             "echo '2022: SEE - GPA: 3.10' >> /home/Bikash/portfolio/education.txt",
-            "echo '   Shree Sharaswasti English Boarding School, Bara Nepal' >> /home/Bikash/portfolio/education.txt",
+            "echo '   Shree Sharaswasti English Boarding School, Lipanimal-3, Bara Nepal' >> /home/Bikash/portfolio/education.txt",
 
             // Skills
             "echo '--- TECHNICAL SKILLS ---' > /home/Bikash/portfolio/skills.txt",
@@ -379,13 +364,22 @@
             "echo '3. 9th Place: Trinity Technology Solo CTF' >> /home/Bikash/portfolio/achievements.txt",
             "echo '4. 18th Place: HackAstra CTF & qualified for finals' >> /home/Bikash/portfolio/achievements.txt",
             "echo '5. 69th Place: Midnight CTF' >> /home/Bikash/portfolio/achievements.txt",
-            "echo '6. Blue Lock Eleven CTF Team Member (Nepal U20)' >> /home/Bikash/portfolio/achievements.txt",
-            "echo '7. TryHackMe: Top 1% & 500+ Days Streak' >> /home/Bikash/portfolio/achievements.txt",
-            "echo '8. HackerOne Bug Bounty: Valid Bug Submissions' >> /home/Bikash/portfolio/achievements.txt",
-            "echo '9. TryHackMe Lab Creator: Ganheist Room' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '6. Team Visored: Captain and active member (team-visored.vercel.app)' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '   Website: https://team-visored.vercel.app/' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '   LinkedIn: https://www.linkedin.com/company/team-visored' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '7. Former Blue Lock Eleven CTF team member' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '   Website: https://bluelockeleven.team/' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '8. TryHackMe: Reached Top 1% and a 500+ day streak' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '9. HackerOne Bug Bounty: Valid Bug Submission (Marked Duplicate)' >> /home/Bikash/portfolio/achievements.txt",
+            "echo '10. TryHackMe Lab Creator: Ganheist Room' >> /home/Bikash/portfolio/achievements.txt",
 
             // Certifications
             "echo '--- CERTIFICATIONS ---' > /home/Bikash/portfolio/certifications.txt",
+            "echo '- TryHackMe Pre-Security' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- TryHackMe Cyber Security 101' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- TryHackMe Advent of Cyber 2022' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- TryHackMe Advent of Cyber 2023' >> /home/Bikash/portfolio/certifications.txt",
+            "echo '- TryHackMe Advent of Cyber 2024' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Google Cybersecurity Professional' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- CompTIA PenTest+ (PT0-002) Course Completed (Coursera)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Cisco Ethical Hacker' >> /home/Bikash/portfolio/certifications.txt",
@@ -393,7 +387,6 @@
             "echo '- Certified Red Team Operations Management (CRTOM)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Certified C++ Practitioner Professional (CCPP)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate' >> /home/Bikash/portfolio/certifications.txt",
-            "echo '- TryHackMe: Pre-Security, Cyber Security 101, Advent of Cyber (2022-2024)' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Certified API Security Analyst' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- APIsec Certified Practitioner' >> /home/Bikash/portfolio/certifications.txt",
             "echo '- Hack The Box Mini Pro Labs: Mythical' >> /home/Bikash/portfolio/certifications.txt",
@@ -406,6 +399,7 @@
             "echo 'LINKEDIN: linkedin.com/in/bikash-sarraf-683787320/' >> /home/Bikash/portfolio/contact.txt",
             "echo 'TRYHACKME: tryhackme.com/p/bikashsarraf' >> /home/Bikash/portfolio/contact.txt",
             "echo 'MEDIUM: medium.com/@spydomain1' >> /home/Bikash/portfolio/contact.txt",
+            "for f in /home/Bikash/portfolio/*.txt; do fold -s -w " + wrapWidth + " \"$f\" > \"$f.tmp\" && mv \"$f.tmp\" \"$f\"; done",
             
             // Timezone: Asia/Kathmandu (UTC+5:45)
             "echo 'Asia/Kathmandu' > /etc/timezone",
@@ -420,15 +414,14 @@
             "echo \"alias logout='echo \"[!] logout command disabled in root shell.\"'\" >> /root/.profile",
             "echo \"printf '\\\\033[H\\\\033[2J\\\\033[3J'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;31m'\" >> /root/.profile",
-            "echo \"echo '  ____   ____   ____ _____   _   _    _    ____ _  _______ ____  _ '\" >> /root/.profile",
-            "echo \"echo ' |  _ \\\\ / ___| / ___|_   _| | | | |  / \\\\  / ___| |/ / ____|  _ \\\\| |'\" >> /root/.profile",
-            "echo \"echo ' | |_) | |  _ | |     | |   | |_| | / _ \\\\| |   |  /|  _| | |_) | |'\" >> /root/.profile",
-            "echo \"echo ' |  _ <| |_| || |___  | |   |  _  |/ ___ \\\\ |___| . \\\\| |___|  _ <|_|'\" >> /root/.profile",
-            "echo \"echo ' |_| \\\\_\\\\\\\\____| \\\\____| |_|   |_| |_/_/   \\\\_\\\\____|_|\\\\_\\\\_____|_| \\\\_(_)'\" >> /root/.profile",
+            "echo \"echo '#   #  ###   ####  #   #  #####  ####'\" >> /root/.profile",
+            "echo \"echo '#   # #   # #      #  #   #      #   #'\" >> /root/.profile",
+            "echo \"echo '##### ##### #      ###    ####   ####'\" >> /root/.profile",
+            "echo \"echo '#   # #   # #      #  #   #      #  #'\" >> /root/.profile",
+            "echo \"echo '#   # #   #  ####  #   #  #####  #   #'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[0m'\" >> /root/.profile",
-            "echo \"echo -e '\\\\e[1;33m😱 WOAH! YOU GOT ROOT ACCESS?! 🚀\\\\e[0m'\" >> /root/.profile",
-            "echo \"echo -e '\\\\e[1;32m🎉 CONGRATULATIONS! You successfully escalated privileges to ROOT (uid=0)!\\\\e[0m'\" >> /root/.profile",
-            "echo \"echo -e '\\\\e[1;36m🏆 You have mastered the Spydomain Terminal challenge!\\\\e[0m'\" >> /root/.profile",
+            "echo \"echo '[+] ROOT ACCESS GRANTED (uid=0)'\" >> /root/.profile",
+            "echo \"echo '[+] You solved the Spydomain Terminal challenge.'\" >> /root/.profile",
             "echo \"echo -e '\\\\e[1;30m---------------------------------------------------------\\\\e[0m'\" >> /root/.profile",
             "echo \"echo ''\" >> /root/.profile",
 
@@ -436,7 +429,6 @@
             "chown -R Bikash:Bikash /home/Bikash",
             "echo \"PS1='\\\\e[1;32mBikash@Spydomain\\\\e[0m:\\\\e[1;34m\\\\w\\\\e[0m\\\\$ '\" > /home/Bikash/.profile",
             "echo \"export TZ='NPT-5:45'\" >> /home/Bikash/.profile",
-            "echo \"stty cols 110 rows 25 2>/dev/null\" >> /home/Bikash/.profile",
             "echo \"cd ~/portfolio\" >> /home/Bikash/.profile",
             "echo \"alias clear='printf \\\"\\\\033[H\\\\033[2J\\\\033[3J\\\"'\" >> /home/Bikash/.profile",
             "echo \"alias sudo='su - root'\" >> /home/Bikash/.profile",

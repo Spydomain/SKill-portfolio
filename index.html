@@ -38,6 +38,7 @@
   <!-- xterm.js for scrollable terminal -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css" />
   <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.js"></script>
   <script src="spybot.js" defer></script>
   <script src="v86/libv86.js"></script>
   <script src="v86-setup.js" defer></script>
@@ -100,7 +101,7 @@
               <span class="stat-label">Certifications</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number" data-target="9">9</span>
+              <span class="stat-number" data-target="10">10</span>
               <span class="stat-label">Achievements</span>
             </div>
           </div>
@@ -130,8 +131,7 @@
               <i class="fas fa-microchip"></i> NOT STARTED
             </span>
           </div>
-          <div class="terminal" id="v86-terminal-container"
-            style="height: 450px; background: #000; position: relative; overflow: hidden;">
+          <div class="terminal" id="v86-terminal-container">
             <div id="v86-loading"
               style="color: #0f0; padding: 20px; font-family: 'Roboto Mono', monospace; text-align: center; cursor: pointer;">
               <p style="font-size: 1.1rem; margin-bottom: 10px;">🛡️ SPYDOMAIN SECURE SHELL</p>
@@ -170,7 +170,7 @@
                 <i class="fas fa-flag"></i>
                 <div>
                   <h4>CTF Player</h4>
-                  <p>Active CTF player as part of Blue Lock Eleven team (Nepal U20)</p>
+                  <p>Captain and active member of Team Visored; former Blue Lock Eleven member</p>
                 </div>
               </div>
               <div class="highlight-item">
@@ -572,17 +572,32 @@
 
           <div class="achievement-item reveal-card">
             <div class="achievement-icon"><i class="fas fa-users"></i></div>
-            <h3>Blue Lock Eleven CTF Team Member</h3>
-            <p>Active CTF player participating in competitions as part of Nepal U20 / Blue Lock Eleven CTF team.</p>
+            <h3>Team Visored Captain &amp; Active Member</h3>
+            <p>Captain and active member of Team Visored, competing in CTF challenges.</p>
+            <div class="achievement-links">
+              <a href="https://team-visored.vercel.app/" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i> Team Website
+              </a>
+              <a href="https://www.linkedin.com/company/team-visored" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i> LinkedIn Page
+              </a>
+            </div>
+          </div>
+
+          <div class="achievement-item reveal-card">
+            <div class="achievement-icon"><i class="fas fa-users"></i></div>
+            <h3>Former Blue Lock Eleven CTF Team Member</h3>
+            <p>Former member of the Blue Lock Eleven CTF team.</p>
             <a href="https://bluelockeleven.team/" target="_blank" rel="noopener">
               <i class="fas fa-external-link-alt"></i> Team Website
             </a>
           </div>
 
-          <div class="achievement-item reveal-card">
+          <div class="achievement-item reveal-card" id="tryhackme-achievement">
             <div class="achievement-icon"><i class="fas fa-fire"></i></div>
-            <h3>TryHackMe: Top 1% & 500+ Days Streak</h3>
-            <p>Ranked in the top 1% globally on TryHackMe platform with over 500+ consecutive days streak.</p>
+            <h3>TryHackMe Progress</h3>
+            <p id="tryhackme-summary">Reached the top 1% globally and a 500+ day streak. View the profile for current statistics.</p>
+            <div id="tryhackme-live-badge" data-user-public-id="" hidden></div>
             <a href="https://tryhackme.com/p/bikashsarraf" target="_blank" rel="noopener">
               <i class="fas fa-external-link-alt"></i> View Profile
             </a>
@@ -591,7 +606,7 @@
           <div class="achievement-item reveal-card">
             <div class="achievement-icon"><i class="fas fa-bug"></i></div>
             <h3>HackerOne Bug Bounty Program</h3>
-            <p>Identified and submitted valid security vulnerabilities on HackerOne bug bounty program.</p>
+            <p>Identified and submitted valid security vulnerability on HackerOne bug bounty program (marked duplicate).</p>
             <a href="https://www.linkedin.com/posts/bikash-sarraf-683787320_bugbounty-cybersecurity-ethicalhacking-activity-7496092306161197058-eZb_"
               target="_blank" rel="noopener">
               <i class="fas fa-external-link-alt"></i> View Post

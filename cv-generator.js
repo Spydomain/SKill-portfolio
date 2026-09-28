@@ -104,7 +104,7 @@ export function generateAndOpenResumePDF() {
     y += lineHeight;
 
     doc.setTextColor(0, 0, 0);
-    y = addText('Chabahil, Kathmandu', margin, y);
+    y = addText('Kathmandu, Nepal', margin, y);
     y += 20;
 
     // Education Section
@@ -157,35 +157,41 @@ export function generateAndOpenResumePDF() {
     
     const projects = [
       '1. Keylogger (Python)',
-      '   Created a keylogger using Python. GitHub: https://github.com/Spydomain/keylogger',
+      '   A Python-based keylogger project for educational purposes.',
+      '   GitHub: https://github.com/Spydomain/keylogger',
       '',
       '2. Bike Rental Nepal (Node.js + React.js)',
+      '   Full-stack bike rental platform built with Node.js and React.js.',
       '   Frontend: https://github.com/Spydomain/front',
       '   Backend: https://github.com/Spydomain/backend',
       '',
       '3. CVE-2023-22809 Automated Exploits (Python)',
-      '   https://github.com/Spydomain/CVE-2023-22809-automated-python-exploits',
+      '   Automated Python exploits for CVE-2023-22809 vulnerability.',
+      '   GitHub: https://github.com/Spydomain/CVE-2023-22809-automated-python-exploits',
       '',
       '4. ClipboardAI (Bash Script)',
-      '   https://github.com/Spydomain/ClipboardAI',
+      '   Bash script that sends copied text to Ollama and pops up instant offline answers.',
+      '   GitHub: https://github.com/Spydomain/ClipboardAI',
       '',
-      '5. NotesVista (Node.js+React.js)',
-      '   https://notesvista.netlify.app/',
+      '5. NotesVista (Node.js + React.js)',
+      '   Modern note-taking application built with MERN stack.',
+      '   Live Demo: https://notesvista.netlify.app/',
       '',
-      '6. NebullaComms (Node.js+React.js)',
-      '   https://nebullacomms.netlify.app/',
+      '6. FGE Identification Test Platform (Flutter)',
+      '   Modern test-taking platform for French Army built with Flutter.',
+      '   Live Demo: https://army-testgit-45113358-666ec.web.app/',
       '',
-      '7. FGE Identification Test Platform (Flutter)',
-      '   https://army-testgit-45113358-666ec.web.app/',
+      '7. CVE-2021-22555 PoC (Python)',
+      '   Proof of Concept for CVE-2021-22555 vulnerability.',
+      '   GitHub: https://github.com/Spydomain/CVE-2021-22555-Poc',
       '',
-      '8. CVE-2021-22555 PoC (Python)',
-      '   https://github.com/Spydomain/CVE-2021-22555-Poc',
+      '8. CVE-2017-1000112 PoC (Python)',
+      '   Proof of Concept for CVE-2017-1000112 vulnerability.',
+      '   GitHub: https://github.com/Spydomain/CVE-2017-1000112-PoC',
       '',
-      '9. CVE-2017-1000112 PoC (Python)',
-      '   https://github.com/Spydomain/CVE-2017-1000112-PoC',
-      '',
-      '10. CVE-2022-0435 PoC (Python)',
-      '   https://github.com/Spydomain/CVE-2022-0435-Poc'
+      '9. CVE-2022-0435 PoC (Python)',
+      '   Proof of Concept for CVE-2022-0435 vulnerability.',
+      '   GitHub: https://github.com/Spydomain/CVE-2022-0435-Poc'
     ];
     
     projects.forEach(project => {
@@ -206,9 +212,10 @@ export function generateAndOpenResumePDF() {
       '9th place in Trinity Technology Solo CTF',
       '18th place in HackAstra CTF and qualified for finals',
       '69th place in Midnight CTF',
-      'Active CTF player as part of Blue Lock Eleven team (Nepal U20)',
-      'TryHackMe: Top 1% with 500+ days streak',
-      'Submitted valid bug reports on HackerOne Bug Bounty Program',
+      'Captain and active member of Team Visored',
+      'Former Blue Lock Eleven CTF team member',
+      'TryHackMe: Reached Top 1% and a 500+ day streak',
+      'Submitted valid bug report on HackerOne Bug Bounty Program (marked duplicate)',
       'Created custom cybersecurity lab room on TryHackMe'
     ];
     
@@ -221,7 +228,7 @@ export function generateAndOpenResumePDF() {
     y = addSectionHeader('CERTIFICATIONS', y);
     
     const certifications = [
-      'Cisco Ethical Hacker Certified',
+      'Cisco Ethical Hacker',
       'Certified Cybersecurity Educator Professional (CCEP)',
       'Google Cybersecurity Professional Certificate',
       'CompTIA PenTest+ (PT0-002) Course Completed (Coursera)',

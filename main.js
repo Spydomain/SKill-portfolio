@@ -12,6 +12,7 @@ function init() {
   initContactForm();
   startMatrix();
   if (typeof initSpyBot === 'function') initSpyBot();
+  initTryHackMeBadge();
   generateFavicon();
 
   // V86 Boot — triggered by Enter or click
@@ -47,6 +48,21 @@ function init() {
       bootV86();
     }
   });
+}
+
+function initTryHackMeBadge() {
+  const mount = document.getElementById('tryhackme-live-badge');
+  const publicId = mount?.dataset.userPublicId.trim();
+  if (!publicId || !/^\d+$/.test(publicId)) return;
+
+  const badge = document.createElement('iframe');
+  badge.src = `https://tryhackme.com/api/v2/badges/public-profile?userPublicId=${publicId}`;
+  badge.title = 'Live TryHackMe statistics for bikashsarraf';
+  badge.loading = 'lazy';
+  mount.appendChild(badge);
+  mount.hidden = false;
+  document.getElementById('tryhackme-summary').textContent =
+    'Reached the top 1% globally and a 500+ day streak. Current statistics update in the badge below.';
 }
 
 // Handle both cases: DOMContentLoaded may or may not have fired
@@ -350,4 +366,3 @@ function generateFavicon() {
     document.head.appendChild(lnk);
   } catch (_) { }
 }
-

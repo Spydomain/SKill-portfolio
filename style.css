@@ -878,11 +878,11 @@ body.menu-open .page-container {
   border: 1px solid rgba(0,255,153,0.3);
   box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0,255,153,0.1);
   background: #000;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease;
   z-index: 1001;
   position: relative;
 }
-.terminal-window:hover { transform: translateY(-5px); border-color: #00ff99; }
+.terminal-window:hover { border-color: #00ff99; }
 
 .terminal-header {
   background: #111; padding: 12px 16px;
@@ -920,11 +920,13 @@ body.menu-open .page-container {
 
 /* Native V86 Terminal Overrides */
 #v86-terminal-container { 
-  padding: 0 !important; 
-  overflow: visible !important; 
-  min-height: 450px;
-  height: auto !important;
-  max-height: 80vh;
+  box-sizing: border-box;
+  width: 100%;
+  height: 450px;
+  min-height: 0;
+  max-height: none;
+  padding: 15px;
+  overflow: hidden;
   background: #000;
   border: 1px solid rgba(0, 255, 153, 0.4);
   border-radius: 0 0 12px 12px;
@@ -935,10 +937,31 @@ body.menu-open .page-container {
 
 #v86-screen {
   width: 100%;
-  height: 450px;
+  height: 100%;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
   visibility: visible;
+}
+
+#v86-screen .xterm {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#v86-screen .xterm-viewport {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+#v86-screen *::-webkit-scrollbar:horizontal {
+  display: none;
+  height: 0;
 }
 
 /* BIOS Boot Animation */
@@ -978,7 +1001,6 @@ body.menu-open .page-container {
   50% { opacity: 0; }
 }
 
-#v86-screen { width: 100%; height: 100%; padding: 15px; box-sizing: border-box; }
 #v86-loading { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #000; z-index: 5; text-align: center; padding: 20px; }
 
 .btn-glow {
@@ -1239,6 +1261,9 @@ body.menu-open .page-container {
 
 .certification-item a, .achievement-item > a, .achievement-links { margin-top: auto; width: fit-content; }
 .achievement-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+#tryhackme-live-badge:not([hidden]) { width: 100%; margin: 0 0 18px; }
+#tryhackme-live-badge iframe { display: block; width: 100%; height: 130px; border: 0; }
 
 /* =============================================
    CONTACT
@@ -1533,6 +1558,11 @@ footer .social-icons { gap: 14px; margin: 10px 0 4px; }
 .spybot-msg.bot .msg-bubble strong {
   color: #00ff99;
 }
+.spybot-msg.bot .msg-bubble a {
+  color: #00ccff;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
 
 /* Typing dots */
 .typing-dots {
@@ -1640,12 +1670,7 @@ footer .social-icons { gap: 14px; margin: 10px 0 4px; }
   .glitch-btn { padding: 8px 12px !important; font-size: 0.8rem !important; flex: 1 1 auto; min-width: 100px; text-align: center; }
   .terminal-window { margin: 5px; border-radius: 8px; }
   #v86-terminal-container { 
-    height: auto !important; 
-    min-height: 400px !important;
-    max-height: 70vh;
-  }
-  #v86-screen {
-    height: 400px !important;
+    height: 400px;
   }
   .spybot-panel {
     bottom: 0; right: 0; left: 0;
@@ -1660,4 +1685,3 @@ footer .social-icons { gap: 14px; margin: 10px 0 4px; }
   }
   .spybot-fab i { font-size: 1.3rem; }
 }
-
