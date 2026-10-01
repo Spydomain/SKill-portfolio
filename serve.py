@@ -1,7 +1,9 @@
 import http.server
+import os
 import socketserver
 
-PORT = 8084
+HOST = os.environ.get("HOST", "0.0.0.0")
+PORT = int(os.environ.get("PORT", "8084"))
 
 class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
@@ -12,8 +14,9 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     Handler = CustomHTTPRequestHandler
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
-        print(f"Serving Bikash Portfolio on http://localhost:{PORT}")
+    with socketserver.ThreadingTCPServer((HOST, PORT), Handler) as httpd:
+        httpd.daemon_threads = True
+        print(f"Serving Bikash Portfolio on http://{HOST}:{PORT}")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

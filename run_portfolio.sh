@@ -1,14 +1,17 @@
 #!/bin/bash
-# run_portfolio.sh
-# Script to host the Bikash Portfolio locally using Python 3
+set -e
 
-echo "Starting Bikash Portfolio server on http://localhost:8084..."
-echo "v86 Emulator will boot as Bikash@Spydomain with full boot logs."
+cd "$(dirname "$0")"
 
-# Check if serve.py exists
-if [ -f "serve.py" ]; then
-    python3 serve.py
+PORT=${PORTFOLIO_PORT:-8080}
+LAN_IP=$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{for (i = 1; i <= NF; i++) if ($i == "src") {print $(i + 1); exit}}')
+
+docker compose up --build -d
+
+echo "Portfolio is available at:"
+echo "  http://localhost:${PORT}"
+if [ -n "$LAN_IP" ]; then
+    echo "  http://${LAN_IP}:${PORT} (from another device on this network)"
 else
-    echo "Error: serve.py not found in current directory."
-    exit 1
+    echo "Find this device's Wi-Fi/Ethernet IPv4 address, then open http://<LAN-IP>:${PORT}"
 fi

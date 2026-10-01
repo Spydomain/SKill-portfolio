@@ -1,0 +1,10 @@
+.git
+__pycache__/
+*.py[cod]
+backend/
+Dockerfile*
+compose.yaml
+README.md
+.dockerignore
+serve.py
+run_portfolio.sh

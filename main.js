@@ -293,11 +293,28 @@ function showPage(id) {
 function initContactForm() {
   const form = $('.contact-form');
   if (!form) return;
-  form.addEventListener('submit', e => {
+  const status = form.querySelector('.form-status');
+  const submitButton = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    fetch(form.action, { method: form.method, body: new FormData(form), headers: { Accept: 'application/json' } })
-      .then(r => { if (r.ok) { alert('Message sent!'); form.reset(); } else throw 0; })
-      .catch(() => alert('Error sending message. Please try again.'));
+    if (status) status.textContent = 'Sending message…';
+    if (submitButton) submitButton.disabled = true;
+    try {
+      const fields = Object.fromEntries(new FormData(form).entries());
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(fields)
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Could not send message');
+      form.reset();
+      if (status) status.textContent = result.message;
+    } catch (error) {
+      if (status) status.textContent = error.message || 'Error sending message. Please try again.';
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
 

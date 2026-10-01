@@ -1,0 +1,40 @@
+services:
+  backend:
+    image: portfolio-backend:latest
+    pull_policy: build
+    build:
+      context: ./backend
+    expose:
+      - "8000"
+    environment:
+      CONTACTS_FILE: /data/messages.jsonl
+    volumes:
+      - contact-data:/data
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  frontend:
+    image: portfolio-frontend:latest
+    pull_policy: build
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      # Bind on every host IPv4 interface so the host's LAN IP works too.
+      - "0.0.0.0:${PORTFOLIO_PORT:-8080}:80"
+    restart: unless-stopped
+
+volumes:
+  contact-data:
